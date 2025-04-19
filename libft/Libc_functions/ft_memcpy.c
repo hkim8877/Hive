@@ -11,13 +11,12 @@ void    *ft_memcpy(void *dest, const void *src, size_t n)
     i = 0;
     if (dest == NULL || src == NULL || n == 0)
         return (dest);
-    if (d == s && n == N)
     while (i < n)
     {
         d[i] = s[i];
         i++;
     }
-    return (dest);   
+    return (dest);
 }
 
 #include <string.h>
