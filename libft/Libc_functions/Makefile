@@ -60,6 +60,8 @@ fclean:
 	rm $(NAME)
 
 %.o: %.c
-	cc -Wall -Wextra -Werror -c $^
+	cc $(CFLAGS) -c $^
 
 re: clean fclean all re
+
+.PHONY: clean fclean all re

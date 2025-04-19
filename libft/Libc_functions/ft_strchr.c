@@ -1,29 +1,29 @@
-/*char    *ft_strchr(const char *s, int c)
-{
-    //unsigned char re;
-    unsigned char t;
-    int i;
+#include "libft.h"
 
-  //  re = (const char)s;
-    t = (const char)c;
-    i = 0;
-    while (!s[i])
+char    *ft_strchr(const char *s, int c)
+{
+    char t;
+    
+    t = (char)c;
+    while (*s != '\0')
     {
-        if (s[i] == t)
-            return (s);
-        i++;
+        if (*s == t)
+            return ((char *)s);
+        s++;
     }
-    return (0);
+    if (t == '\0')
+        return ((char *)s);
+    return (NULL);
 }
-*/
+
 #include <stdio.h>
 #include <string.h>
 int main()
 {
     char test[]= "Hello";
-    int c = 'e';
+    int c = '\0';
 
-    //printf("%c\n", ft_strchr(test, c));
+    printf("%s\n", ft_strchr(test, c));
      printf("%s\n", strchr(test,c));
     // printf("%s\n", test);
 }
