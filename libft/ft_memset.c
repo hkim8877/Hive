@@ -13,7 +13,6 @@ void    *ft_memset(void *s, int c, size_t n)
         i++;
     }
     return (s);
-
 }
 
 #include <stdio.h>

@@ -3,16 +3,31 @@
 char    *ft_strrchr(const char *s, int c)
 {
        char   t;
-       int    s_len;
+       size_t   s_len;
 
        t = (char)c;
-       s_len = 0;
-       while (*s > 0)
-              if (*s == t)
-                     return ((char *)s);
+       s_len = ft_strlen(s);
+       while (s_len > 0)
+       {
+              if (s[s_len] == t)
+                    return ((char *)s + s_len);
+              s_len--;
+       }
        if (t == '\0')
               return ((char *)s);
        return (NULL);
+}
+
+#include <string.h>
+#include <stdio.h>
+
+int    main()
+{
+       char test[] = "hello";
+       int a = '\0';
+
+       printf("%s\n", ft_strrchr(test, a));
+       printf("%s\n", strrchr(test, a));
 }
 
 /*DESCRIPTION
@@ -32,4 +47,26 @@ RETURN VALUE
 
        The strchrnul() function returns a pointer to the matched character, or a pointer to the null  byte  at
        the end of s (i.e., s+strlen(s)) if the character is not found.
+
+char *ft_strrchr(const char *s, int c)
+{
+    char    *last;
+    char    t;
+
+    t = (char)c;
+    last = NULL;
+    
+    while (*s)
+    {
+        if (*s == t)
+            last = (char *)s;
+        s++;
+    }
+    
+    // Check for null terminator if c was '\0'
+    if (t == '\0')
+        return ((char *)s);
+    
+    return (last);
+}
 */
