@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stddef.h>
 
 size_t  ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -13,7 +12,7 @@ size_t  ft_strlcpy(char *dst, const char *src, size_t size)
     if (size == 0)
         return (s);
     while (src[i] != '\0' && i < (size - 1))
-    {s
+    {
         dst[i] = src[i];
         i++;
     }
@@ -22,7 +21,7 @@ size_t  ft_strlcpy(char *dst, const char *src, size_t size)
 }
 
 #include <stdio.h>
-#include <bsd/string.h> // sudo apt-get install libbsd-dev / not working
+#include <bsd/string.h> 
 
 int main()
 {

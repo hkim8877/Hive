@@ -1,7 +1,20 @@
+#include "libft.h"
+
 char    *ft_strrchr(const char *s, int c)
 {
+       char   t;
+       int    s_len;
 
+       t = (char)c;
+       s_len = 0;
+       while (*s > 0)
+              if (*s == t)
+                     return ((char *)s);
+       if (t == '\0')
+              return ((char *)s);
+       return (NULL);
 }
+
 /*DESCRIPTION
        The strchr() function returns a pointer to the first occurrence of the character c in the string s.
 
