@@ -1,15 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 15:20:28 by hyunjkim          #+#    #+#             */
+/*   Updated: 2025/04/22 15:20:29 by hyunjkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void    *ft_memmove(void *dest, const void *src, size_t n)
 {
     unsigned char   *d;
     const unsigned char *s;
-    size_t  i;
-
+        
     d = (unsigned char *) dest;
     s = (const unsigned char *) src;
-    i = 0;
-    if (d < s)
+    if (d <= s)
+    {
+        while (n--)
+            *(d++) = *(s++);
+    }
+    else
+    {
+        d = d + (n - 1);
+        s = s + (n - 1);
+        while (n--)
+        {
+            *(d--) =  * (s--);
+        }
+    }
+    return (dest);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char a[] = "Hello";
+    char *b = "12345678";
+
+    printf("%s\n", (char *)ft_memmove(a, b, 6));
+    printf("%s\n", (char *)memmove(a, b, 6));
+
 }
 
 /*

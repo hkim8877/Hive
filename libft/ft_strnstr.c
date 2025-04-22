@@ -1,8 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 15:19:02 by hyunjkim          #+#    #+#             */
+/*   Updated: 2025/04/22 15:19:06 by hyunjkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char    *ft_strnstr(const char *big, const char *little, size_t len)
 {
+     size_t    i;
+     size_t    j;
+          
+     i  =  0;
+     if (*little == '\0')
+          return ((char *)big);
+     while (i < len && big[i] != '\0')
+     {
+          j = 0;
+	     while ((big[i + j] == little[j]) && (little[j] != '\0') && ((i + j) < len))
+               j++;
+		if (little[j] == '\0')
+               return ((char *)&big[i]);
+	     i++;
+     }
+     return (NULL);
+}
 
+#include <stdio.h>
+#include <bsd/string.h>
+
+int  main()
+{
+    char test1[] = "123456789";
+    char test2[] = "456";
+    char test3[3];
+    
+    printf("strnstr1: %s\n", (char *)strnstr(test1,test2,8));
+    printf("ft_strnstr1: %s\n", (char *)ft_strnstr(test1,test2,8));
+    printf("strnstr2: %s\n", (char *)strnstr(test1,test2,0));
+    printf("ft_strnstr2: %s\n", (char *)ft_strnstr(test1,test2,0));
+    printf("strnstr3: %s\n", (char *)strnstr(test1,test2,5));
+    printf("ft_strnstr3: %s\n", (char *)ft_strnstr(test1,test2,5));
+    printf("strnstr4: %s\n", (char *)strnstr(test1,test3,15));
+    printf("ft_strnstr4: %s\n", (char *)ft_strnstr(test1,test3,15));
+    printf("strnstr5: %s\n", (char *)strnstr(test3,test1,3));
+    printf("ft_strnstr5: %s\n", (char *)ft_strnstr(test3,test1,3));
 }
 /*DESCRIPTION
      The strnstr() function locates the first occurrence of the null-terminated string little in the string
