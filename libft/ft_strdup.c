@@ -14,7 +14,36 @@
 
 char    *ft_strdup(const char *s)
 {
+       int    len;
+       int    i;
+       char   *dest;
 
+       len = 0;
+       while (s[len] != '\0')
+              len++;
+       dest = (char *)malloc(sizeof(char) * (len + 1));
+       i = 0;
+       while (i < len)
+       {
+              dest[i] = s[i];
+              i++;
+       }
+       dest[i] = '\0';
+       return (dest);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int    main()
+{
+       char t1[] = "Hello";
+       char t2[] = "";
+       
+       printf("strdup1: %s\n", strdup(t1));
+       printf("ft_strdup1: %s\n", ft_strdup(t1));
+       printf("strdup2: %s\n", (strdup(t2)));
+       printf("ft_strdup2: %s\n", ft_strdup(t2));
 }
 /*DESCRIPTION
        The  strdup()  function returns a pointer to a new string which is a duplicate of the string s.  Memory

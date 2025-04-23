@@ -14,7 +14,7 @@
 
 void    *ft_calloc(size_t nmemb, size_t size)
 {
-
+       
 }
 
 /* The  calloc() function allocates memory for an array of nmemb elements of size bytes each and returns a
@@ -41,4 +41,6 @@ void    *ft_calloc(size_t nmemb, size_t size)
     it is not freed or moved.
 
     On  success,  the reallocarray() function returns a pointer to the newly allocated memory.  On failure,
-    it returns NULL and the original block of memory is left untouched. */
+    it returns NULL and the original block of memory is left untouched.
+
+    If nmemb or size is 0, then calloc() returns a unique pointer value that can be successfully passed to free().*/
