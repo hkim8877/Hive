@@ -12,10 +12,82 @@
 
 #include "libft.h"
 
-void    *ft_calloc(size_t nmemb, size_t size)
+void    *ft_calloc(size_t nmemb, size_t size) // nmemb = number of elements to allocate, size = size (in bytes) of each element 
 {
-       
+       void  *memory;
+       size_t total;
+
+       total = nmemb * size;
+       memory = malloc(total);
+       if (!memory)
+              return (NULL);       
+       ft_memset(memory, 0, total);
+       return (memory);
 }
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>  // For proper SIZE_MAX
+#include <string.h>  // For memset
+
+
+int main()
+{
+    // Test 1: Zero-size allocation
+    char *t1_calloc = calloc(0, 0);
+    char *t1_ft_calloc = ft_calloc(0, 0);
+    
+    printf("Test 1: ");
+    if ((t1_calloc == NULL && t1_ft_calloc == NULL) || 
+        (t1_calloc != NULL && t1_ft_calloc != NULL)) {
+        printf("PASS\n");
+    } else {
+        printf("FAIL\n");
+    }
+    free(t1_calloc);
+    free(t1_ft_calloc);
+
+    // Test 2: Overflow case
+    char *t2_calloc = calloc(SIZE_MAX, 2);
+    char *t2_ft_calloc = ft_calloc(SIZE_MAX, 2);
+    
+    printf("Test 2: ");
+    if (t2_calloc == NULL && t2_ft_calloc == NULL) {
+        printf("PASS\n");
+    } else {
+        printf("FAIL\n");
+    }
+
+    // Test 3: Normal allocation
+    size_t reasonable_size = 100;
+    char *t3_calloc = calloc(reasonable_size, 1);
+    char *t3_ft_calloc = ft_calloc(reasonable_size, 1);
+    
+    printf("Test 3: ");
+    if (t3_calloc && t3_ft_calloc && 
+        memcmp(t3_calloc, t3_ft_calloc, reasonable_size) == 0) {
+        printf("PASS\n");
+    } else {
+        printf("FAIL\n");
+    }
+    free(t3_calloc);
+    free(t3_ft_calloc);
+
+    return 0;
+}
+     
+       
+
+
+       /*
+       ASSERT(!ft_calloc(0, 0) == !calloc(0, 0));
+       ASSERT(!ft_calloc(SIZE_MAX, 0) == !calloc(SIZE_MAX, 0));
+       ASSERT(!ft_calloc(SIZE_MAX, 2) == !calloc(SIZE_MAX, 2));
+       ASSERT(!ft_calloc(0, SIZE_MAX) == !calloc(0, SIZE_MAX));
+       ASSERT(!ft_calloc(2, SIZE_MAX) == !calloc(2, SIZE_MAX));
+       ASSERT(!ft_calloc(SIZE_MAX, SIZE_MAX) == !calloc(SIZE_MAX, SIZE_MAX));*/
+
+
 
 /* The  calloc() function allocates memory for an array of nmemb elements of size bytes each and returns a
        pointer to the allocated memory.  The memory is set to zero.  If nmemb or size is 0, then calloc()  re‐

@@ -31,7 +31,7 @@ char    *ft_strdup(const char *s)
        dest[i] = '\0';
        return (dest);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -40,11 +40,11 @@ int    main()
        char t1[] = "Hello";
        char t2[] = "";
        
-       printf("strdup1: %s\n", strdup(t1));
+       printf("strdup1: %s \n", strdup(t1));
        printf("ft_strdup1: %s\n", ft_strdup(t1));
        printf("strdup2: %s\n", (strdup(t2)));
        printf("ft_strdup2: %s\n", ft_strdup(t2));
-}
+}*/
 /*DESCRIPTION
        The  strdup()  function returns a pointer to a new string which is a duplicate of the string s.  Memory
        for the new string is obtained with malloc(3), and can be freed with free(3).

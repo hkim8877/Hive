@@ -25,11 +25,11 @@ void    ft_bzero(void *s, size_t n)
         i++;
     }
 }
-
+/*
 #include <stdio.h>
 int main()
 {
     char test[] = "abcdef";
     ft_bzero(test, 3);
     printf("%s\n", test+3);
-}
+}*/

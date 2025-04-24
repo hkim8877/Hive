@@ -36,11 +36,12 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
 
 int main()
 {
-    char a[] = "abc";
-    char b[] = "abc";
+    printf("1. memcmp: %d, ft_memcmp: %d\n", memcmp("abc", "abc", 3), ft_memcmp("abc", "abc", 3));
+	printf("2. memcmp: %d, ft_memcmp: %d\n", memcmp("abc", "ABC", 3), ft_memcmp("abc", "ABC", 3));
+	printf("3. memcmp: %d, ft_memcmp: %d\n", memcmp("ABC", "abc", 3), ft_memcmp("ABC", "abc", 3));
+	printf("4. memcmp: %d, ft_memcmp: %d\n", memcmp("abc", "ab", 2),  ft_memcmp("abc", "ab", 2));
+	printf("5. memcmp: %d, ft_memcmp: %d\n", memcmp("", "", 0), ft_memcmp("", "", 0));
 
-    printf("%d\n", ft_memcmp(a, b, 0));
-    printf("%d\n", memcmp(a, b, 0));
 }
 
 /*DESCRIPTION

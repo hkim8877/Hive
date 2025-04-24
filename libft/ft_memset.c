@@ -26,7 +26,7 @@ void    *ft_memset(void *s, int c, size_t n)
     }
     return (s);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -34,4 +34,4 @@ int main()
     char test[10] = "abcdef";
     printf("%s\n", (char *)ft_memset(test,'-', 30));
    // printf("%s\n", (char*)memset(test, '-', 30));
-}
+}*/

@@ -35,7 +35,7 @@ size_t  ft_strlcat(char *dst, const char *src, size_t size)
     dst[d_len + i] = '\0';
     return (d_len + s_len);
 }
-
+/*
 #include <stdio.h>
 #include <bsd/string.h>
 
@@ -48,13 +48,13 @@ int main()
 
     printf("%zu\n", re);
     printf("%s\n", d);
- /*  size_t or = strlcat(d, src, 3);
+   size_t or = strlcat(d, src, 3);
 
     printf("%zu\n", or);
     printf("%s\n", d);
-    */
+    
     return 0;
-}
+*/
 
 
 /*DESCRIPTION

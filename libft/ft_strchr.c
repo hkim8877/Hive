@@ -36,6 +36,6 @@ int main()
     int c = '\0';
 
     printf("%s\n", ft_strchr(test, c));
-     printf("%s\n", strchr(test,c));
+    printf("%s\n", strchr(test,c));
     // printf("%s\n", test);
 }
