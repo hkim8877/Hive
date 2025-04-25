@@ -27,6 +27,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
     dst[i] = '\0';
     return ((char *)dst);
 }
+/*
 #include <stdio.h>
 int main()
 {
@@ -38,3 +39,4 @@ int main()
     printf("3. len > s_len: %s\n", ft_substr(a, 3, 15));
     printf("4. s = empty: %s\n", ft_substr(b,3,5));
 }
+    */

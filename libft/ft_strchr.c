@@ -27,7 +27,7 @@ char    *ft_strchr(const char *s, int c)
         return ((char *)s);
     return (NULL);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -39,3 +39,4 @@ int main()
     printf("%s\n", strchr(test,c));
     // printf("%s\n", test);
 }
+*/

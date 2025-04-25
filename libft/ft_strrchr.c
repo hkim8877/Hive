@@ -29,7 +29,7 @@ char    *ft_strrchr(const char *s, int c)
               return ((char *)s);
        return (NULL);
 }
-
+/*
 #include <string.h>
 #include <stdio.h>
 
@@ -41,7 +41,7 @@ int    main()
        printf("%s\n", ft_strrchr(test, a));
        printf("%s\n", strrchr(test, a));
 }
-
+*/
 /*DESCRIPTION
        The strchr() function returns a pointer to the first occurrence of the character c in the string s.
 
