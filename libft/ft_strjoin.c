@@ -15,6 +15,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
         return (NULL);
     ft_memcpy(dst, s1, s1_len);
     ft_memcpy(dst + s1_len, s2, s2_len + 1);
+    dst[s1_len + s2_len] = '\0';
     return (dst);
 }
 /*
@@ -49,4 +50,12 @@ int main()
 
     return (0);
 
-}*/
+}
+DESCRIPTION
+    Allocate (with malloc(3)) and returns a new string resulting from the concatenation of s1 and s2.
+PARAMETERS
+    s1: prefix string
+    s2: suffix string
+RETURN VALUES
+    ft_strjoin() returns the new string; NULL if the memory allocation failed    
+*/

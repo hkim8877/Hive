@@ -19,7 +19,7 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
     i = 0;
     while (i < n)
     {
-        if (s1[i] != s2[i])
+       if ((unsigned char)s1[i] != (unsigned char)s2[i])
             return ((unsigned char)s1[i] - (unsigned char)s2[i]);
         if (s1[i] == '\0' || s2[i] == '\0')
             break;
@@ -27,7 +27,7 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
     }
     return (0);
 }
-    
+ /*   
 #include <stdio.h>
 #include <string.h>
 
@@ -66,7 +66,7 @@ int main()
     
     return (0);
 }
-
+*/
 /*DESCRIPTION
        The  strcmp()  function compares the two strings s1 and s2.  The locale is not taken into account (for a locale-aware compari‐
        son, see strcoll(3)).  The comparison is done using unsigned characters.

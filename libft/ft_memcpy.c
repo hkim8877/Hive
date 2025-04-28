@@ -45,4 +45,10 @@ int main()
 
     return 0;
 }
+    DESCRIPTION
+    The memcpy() function copies n bytes from memory area src to memory area dest. 
+    If dest and src overlap, behavior is undefined. 
+    Applications in which dest and src might overlap should use memove(3) instead.
+    RETURN VALUES
+    The memcpy() function returns the original value of dest
 */

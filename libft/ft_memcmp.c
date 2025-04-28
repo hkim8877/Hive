@@ -30,7 +30,7 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
     return (0);
 }
 
-
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -43,7 +43,7 @@ int main()
 	printf("5. memcmp: %d, ft_memcmp: %d\n", memcmp("", "", 0), ft_memcmp("", "", 0));
 
 }
-
+*/
 /*DESCRIPTION
 The  memcmp() function compares the first n bytes (each interpreted as unsigned char) of the memory ar‐
 eas s1 and s2.

@@ -32,4 +32,11 @@ int main()
     char test[] = "abcdef";
     ft_bzero(test, 3);
     printf("%s\n", test+3);
-}*/
+}
+DESCRIPTION
+The bzero() function writes n zeroed bytes to the string s. 
+If n is zero, bzero() does nothing.
+This function works the same way as the memset() function, 
+except you don't have to specify what character to write, 
+it'll always be 0 (NUL character).    
+*/

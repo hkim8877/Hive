@@ -20,10 +20,10 @@ char    *ft_strnstr(const char *big, const char *little, size_t len)
      i  =  0;
      if (*little == '\0')
           return ((char *)big);
-     while (i < len && big[i] != '\0')
+     while (big[i] != '\0' && i < len)
      {
           j = 0;
-	     while ((big[i + j] == little[j]) && (little[j] != '\0') && ((i + j) < len))
+	     while ((little[j] != '\0') && ((i + j) < len) && (big[i + j] == little[j]))
                j++;
 		if (little[j] == '\0')
                return ((char *)&big[i]);
@@ -31,7 +31,7 @@ char    *ft_strnstr(const char *big, const char *little, size_t len)
      }
      return (NULL);
 }
-
+/*
 #include <stdio.h>
 #include <bsd/string.h>
 
@@ -52,6 +52,7 @@ int  main()
     printf("strnstr5: %s\n", (char *)strnstr(test3,test1,3));
     printf("ft_strnstr5: %s\n", (char *)ft_strnstr(test3,test1,3));
 }
+    */
 /*DESCRIPTION
      The strnstr() function locates the first occurrence of the null-terminated string little in the string
      big, where not more than len characters are searched.  Characters that appear after a ‘\0’ character are

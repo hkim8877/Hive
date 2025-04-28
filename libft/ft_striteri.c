@@ -10,4 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void    ft_striteri(char *s, void (*f)(unsigned int, char*));
+#include "libft.h"
+
+void    ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+    unsigned int    i;
+
+    i = 0;
+    while (s[i])
+    {
+        (*f)(i, &s[i]);
+        i++;
+    }
+}
+
+/*
+DESCRIPTION
+    Apply the function 'f' to each characters of the string 's', passing its index as a first parameter.
+    Each character is transmitted by address to 'f' so it can be modified if necessary.
+    The function f directly modifies the value of the character in the original string.
+*/

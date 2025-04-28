@@ -27,7 +27,7 @@ void    *ft_memchr(const void *s, int c, size_t n)
     }
     return (0);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -47,7 +47,7 @@ int main()
     printf("memchr: %s\n", (char *)memchr(test,t2,3));
     printf("ft_memchr: %s\n", (char *)ft_memchr(test,t2,3));
 }
-
+*/
 /*DESCRIPTION
 The  memchr()  function  scans the initial n bytes of the memory area pointed to by s for the first in‐
 stance of c.  Both c and the bytes of the memory area pointed to by s are interpreted as unsigned char.
