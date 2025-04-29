@@ -6,15 +6,15 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:21:02 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/22 15:21:03 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:07:27 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    if (c >= 32 && c <= 126)
-        return (1);
-    return (0);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

@@ -6,26 +6,27 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:20:53 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/22 15:20:55 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:06:45 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// nmemb = number of elements to allocate, size = size (in bytes) of each element 
-void    *ft_calloc(size_t nmemb, size_t size)
+// nmemb = number of elements to allocate
+//size = size (in bytes) of each element 
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    unsigned char  *memory;
-    size_t total;
+	unsigned char	*memory;
+	size_t			total;
 
-    total = nmemb * size;
-    if (nmemb > 0 && size > 0 && total / nmemb != size)
-        return (NULL);
-    memory = malloc(total);
-    if (!memory)
-        return (NULL);       
-    ft_memset(memory, 0, total);
-    return (memory);
+	total = nmemb * size;
+	if (nmemb > 0 && size > 0 && total / nmemb != size)
+		return (NULL);
+	memory = malloc(total);
+	if (!memory)
+		return (NULL);
+	ft_memset(memory, 0, total);
+	return (memory);
 }
 /*
 #include <stdio.h>
@@ -81,27 +82,35 @@ int main()
 */
 /* 
 DESCRIPTION
-    The calloc() function allocates memory.
-    The allocated memory is aligned such that it can be used for any data type.
-    The calloc() function contigously allocates enough space for count objects 
-    that are size bytes of memory each and returns a pointer to the allocated memory.
-    The allocated memory is filled with bytes of value zero.
+The calloc() function allocates memory.
+The allocated memory is aligned such that it can be used for any 
+data type.The calloc() function contigously allocates enough space 
+for count objects that are size bytes of memory each and returns a 
+pointer to the allocated memory.
+The allocated memory is filled with bytes of value zero.
 RETURN VALUES
-    If successful, calloc() returns a pointer to allocated memory. 
-    If there is an error, they return a NULL pointer and set errno to ENOMEM.
+If successful, calloc() returns a pointer to allocated memory. 
+If there is an error, they return a NULL pointer and set errno to 
+ENOMEM.
 
-The  calloc() function allocates memory for an array of nmemb elements of size bytes each and returns a
-pointer to the allocated memory.  The memory is set to zero.  If nmemb or size is 0, then calloc()  re‐
-turns  either  NULL, or a unique pointer value that can later be successfully passed to free().  If the
-multiplication of nmemb and size would result in integer overflow, then calloc() returns an error.   By
-contrast,  an integer overflow would not be detected in the following call to malloc(), with the result
+The  calloc() function allocates memory for an array of nmemb 
+elements of size bytes each and returns a pointer to the allocated 
+memory.  The memory is set to zero.  If nmemb or size is 0, 
+then calloc()  returns  either  NULL, or a unique pointer value that 
+can later be successfully passed to free().  If the
+multiplication of nmemb and size would result in integer overflow, 
+then calloc() returns an error.   
+By contrast,  an integer overflow would not be detected in the 
+following call to malloc(), with the result
 that an incorrectly sized block of memory would be allocated:
 
     malloc(nmemb * size);
            
-The malloc() and calloc() functions return a pointer to the allocated memory, which is suitably aligned
-    for any built-in type.  On error, these functions return NULL.  NULL may also be returned by a success‐
-    ful  call to malloc() with a size of zero, or by a successful call to calloc() with nmemb or size equal
-    to zero.
+The malloc() and calloc() functions return a pointer to the 
+allocated memory, which is suitably aligned for any built-in type.  
+On error, these functions return NULL.  NULL may also be returned 
+by a successful  call to malloc() with a size of zero, or by a 
+successful call to calloc() with nmemb or size equal to zero.
 
-If nmemb or size is 0, then calloc() returns a unique pointer value that can be successfully passed to free().*/
+If nmemb or size is 0, then calloc() returns a unique pointer 
+value that can be successfully passed to free().*/

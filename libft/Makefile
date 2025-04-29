@@ -1,6 +1,6 @@
-NAME = libft.a
+NAME := libft.a
 
-SRCS = ft_isalpha.c \
+SRCS := ft_isalpha.c \
 	 ft_isdigit.c \
 	 ft_isalnum.c \
 	 ft_isascii.c \
@@ -35,7 +35,7 @@ SRCS = ft_isalpha.c \
 	 ft_putendl_fd.c \
 	 ft_putnbr_fd.c \
 
-BONUS_SRCS =  ft_lstnew.c \
+BONUS_SRCS :=  ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -45,23 +45,35 @@ BONUS_SRCS =  ft_lstnew.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJS := $(SRCS:%.c=%.o)
+
+BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
+
+HEADERS := libft.h
+
 CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $^
+	
+%.o: %.c $(HEADERS)
+	cc -c $< -o $@ $(CFLAGS)
 
 all: $(NAME)
 
 clean:
-	rm $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
-fclean:
-	rm $(NAME)
+fclean: clean
+	rm -f $(NAME)
+	
+bonus:  $(NAME) $(BONUS_OBJS)
+	ar -rcs $^
 
-%.o: %.c
-	cc $(CFLAGS) -c $^
+re: fclean all
 
-re: clean fclean all re
+test: test.c bonus
+	cc $< $(NAME) -o $@ -lbsd
+	./$@
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re bonus test

@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void    ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
 	if (fd < 0)
 		return ;
 	write(fd, &c, 1);
 }
-
- /* first parameter is the file descriptor
+/* first parameter is the file descriptor
     second parameter is the address to the character*/
-    
 /*
 DESCRIPTION
-    The ft_putchar_fd() function writes the character c on the file descriptor fd.
+    The ft_putchar_fd() function writes the character c on the file 
+    descriptor fd.
 PARAMETERS
     c: character to write
     fd: file descriptor on which to write

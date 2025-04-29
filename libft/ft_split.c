@@ -6,19 +6,19 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:57:25 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/25 13:57:27 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:35:56 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 //counts how many non-delimiter segments exist in the string
-//tracks the number of segments found
-//flag indicates if we're currently inside a segment
-static size_t	count_segments(char const *s, char c) 
+//'count' tracks the number of segments found
+//'in_segment' flag indicates if we're currently inside a segment
+static size_t	count_segments(char const *s, char c)
 {
-	size_t	count;          
-	int		in_segment;     
+	size_t	count;
+	int		in_segment;
 
 	count = 0;
 	in_segment = 0;
@@ -37,8 +37,9 @@ static size_t	count_segments(char const *s, char c)
 	}
 	return (count);
 }
+
 //frees all allocated memory in case of allocation failure
-static void		cleanup_memory(char **strs, size_t allocated_count)
+static void	cleanup_memory(char **strs, size_t allocated_count)
 {
 	size_t	i;
 
@@ -48,10 +49,11 @@ static void		cleanup_memory(char **strs, size_t allocated_count)
 		free(strs[i]);
 		i++;
 	}
-	free(strs);     //free the array of pointers
+	free(strs);
 }
+
 //extract one segment from the string
-static char		*extract_segment(char const **s, char c)
+static char	*extract_segment(char const **s, char c)
 {
 	char const	*start;
 	char const	*end;
@@ -68,7 +70,7 @@ static char		*extract_segment(char const **s, char c)
 	return (segment);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	size_t	segment_count;
@@ -177,13 +179,13 @@ int main() {
 */
 /*
 DESCRIPTION
-    Allocate (with malloc(3)) and returns an array of strings obtained by 
+Allocate (with malloc(3)) and returns an array of strings obtained by 
     splitting s with the character c, used as delimiter.
     The returned array must be NUL-terminated.
 PARAMETERS
     s: string to split
     c: delimiter character
 RETURN VALUES
-    ft_split() returns an array of strings resulting from the splitting of s; 
+ ft_split() returns an array of strings resulting from the splitting of s; 
     NULL if the memory allocation failed.
 */

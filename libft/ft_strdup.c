@@ -12,24 +12,24 @@
 
 #include "libft.h"
 
-char    *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-       int    len;
-       int    i;
-       char   *dest;
+	int		len;
+	int		i;
+	char	*dest;
 
-       len = 0;
-       while (s[len] != '\0')
-              len++;
-       dest = (char *)malloc(sizeof(char) * (len + 1));
-       i = 0;
-       while (i < len)
-       {
-              dest[i] = s[i];
-              i++;
-       }
-       dest[i] = '\0';
-       return (dest);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	i = 0;
+	while (i < len)
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 /*
 #include <stdio.h>
@@ -46,18 +46,22 @@ int    main()
        printf("ft_strdup2: %s\n", ft_strdup(t2));
 }*/
 /*DESCRIPTION
-       The  strdup()  function returns a pointer to a new string which is a duplicate of the string s.  Memory
-       for the new string is obtained with malloc(3), and can be freed with free(3).
+       The  strdup()  function returns a pointer to a new string which is a 
+       duplicate of the string s.  Memory for the new string is obtained with 
+       malloc(3), and can be freed with free(3).
 
-       The strndup() function is similar, but copies at most n bytes.  If s is longer than n, only n bytes are
+       The strndup() function is similar, but copies at most n bytes.  
+       If s is longer than n, only n bytes are
        copied, and a terminating null byte ('\0') is added.
 
-       strdupa()  and  strndupa()  are  similar, but use alloca(3) to allocate the buffer.  They are available
-       only when using the GNU GCC suite, and suffer from the same limitations described in alloca(3).
+       strdupa()  and  strndupa()  are  similar, but use alloca(3) to allocate 
+       the buffer.  They are available only when using the GNU GCC suite, and 
+       suffer from the same limitations described in alloca(3).
 
 RETURN VALUE
-       On success, the strdup() function returns a pointer to the duplicated string.  It returns NULL  if  in‐
-       sufficient memory was available, with errno set to indicate the cause of the error.
+       On success, the strdup() function returns a pointer to the duplicated 
+       string.  It returns NULL  if  insufficient memory was available, with 
+       errno set to indicate the cause of the error.
 
 ERRORS
        ENOMEM Insufficient memory available to allocate duplicate string.

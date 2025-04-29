@@ -6,30 +6,31 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:19:02 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/22 15:19:06 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:45:15 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-     size_t    i;
-     size_t    j;
-          
-     i  =  0;
-     if (*little == '\0')
-          return ((char *)big);
-     while (big[i] != '\0' && i < len)
-     {
-          j = 0;
-	     while ((little[j] != '\0') && ((i + j) < len) && (big[i + j] == little[j]))
-               j++;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (*little == '\0')
+		return ((char *)big);
+	while (big[i] != '\0' && i < len)
+	{
+		j = 0;
+		while ((little[j] != '\0') && ((i + j) < len)
+			&& (big[i + j] == little[j]))
+			j++;
 		if (little[j] == '\0')
-               return ((char *)&big[i]);
-	     i++;
-     }
-     return (NULL);
+			return ((char *)&big[i]);
+		i++;
+	}
+	return (NULL);
 }
 /*
 #include <stdio.h>
@@ -52,19 +53,24 @@ int  main()
     printf("strnstr5: %s\n", (char *)strnstr(test3,test1,3));
     printf("ft_strnstr5: %s\n", (char *)ft_strnstr(test3,test1,3));
 }
-    */
+*/
 /*DESCRIPTION
-     The strnstr() function locates the first occurrence of the null-terminated string little in the string
-     big, where not more than len characters are searched.  Characters that appear after a ‘\0’ character are
-     not searched.  Since the strnstr() function is a FreeBSD specific API, it should only be used when porta‐
+     The strnstr() function locates the first occurrence of 
+the null-terminated string little in the string
+     big, where not more than len characters are searched.  
+Characters that appear after a ‘\0’ character are
+     not searched.  Since the strnstr() function is a FreeBSD 
+specific API, it should only be used when porta‐
      bility is not a concern.
-
 RETURN VALUES
-     If little is an empty string, big is returned; if little occurs nowhere in big, NULL is returned; other‐
-     wise a pointer to the first character of the first occurrence of little is returned.
+     If little is an empty string, big is returned; if little occurs 
+nowhere in big, NULL is returned; other‐
+     wise a pointer to the first character of the first occurrence 
+of little is returned.
 
 EXAMPLES
-     The following sets the pointer ptr to NULL, because only the first 4 characters of largestring are
+     The following sets the pointer ptr to NULL, because only 
+the first 4 characters of largestring are
      searched:
 
            const char *largestring = "Foo Bar Baz";

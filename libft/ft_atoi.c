@@ -12,29 +12,29 @@
 
 #include "libft.h"
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-    int sign;
-    int result;
+	int	sign;
+	int	result;
 
-    sign = 1;
-    result = 0;
-    while (*nptr == ' '  || (*nptr >= 9 && *nptr <= 13))
-        nptr++;
-    if (*nptr == '+' || *nptr == '-')
-    {
-        if (*nptr == '-')
-            sign = -sign;
-        nptr++;
-    }
-    while (*nptr >= '0' && *nptr <= '9')
-    {
-        result *= 10;
-        result = result + *nptr - '0';
-        nptr++;
-    }
-    result *= sign;
-    return (result);    
+	sign = 1;
+	result = 0;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr == '-')
+			sign = -sign;
+		nptr++;
+	}
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		result *= 10;
+		result = result + *nptr - '0';
+		nptr++;
+	}
+	result *= sign;
+	return (result);
 }
 /*
 #include <stdlib.h>
@@ -62,15 +62,16 @@ int main()
     printf("atoi4: %d\n", atoi(t6));
     printf("ft_atoi4: %d\n", ft_atoi(t6));
 }
-    */
+*/
 /*
 DESCRIPTION
     The atoi() function converts the 
     initial portion of the string pointed to by str to int representation.
-    The string passed as parameter may begin with an arbitrary number of whitespaces 
-    as determined by isspace(3)
-    After the arbitrary number of whitespaces, there can be one single optional '+' or '-' sign
-    The remainder of the string will be converted to an int, stopping at the first character 
-    which is not a valid digit in the given base (in our case we only need to manage base 10, 
-    so the valid digits are 0-9)
+    The string passed as parameter may begin with an arbitrary number of 
+    whitespaces as determined by isspace(3)
+    After the arbitrary number of whitespaces, there can be one single 
+    optional '+' or '-' sign
+    The remainder of the string will be converted to an int, stopping 
+    at the first character which is not a valid digit in the given base 
+    (in our case we only need to manage base 10, so the valid digits are 0-9)
 */
