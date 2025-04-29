@@ -10,4 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putendl_fd(char *s, int fd);
+#include "libft.h"
+
+void    ft_putendl_fd(char *s, int fd)
+{
+    if (!s || fd < 0)
+		return ;
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}
+/*
+#include <fcntl.h>   // for open()
+#include <unistd.h>  // for write(), close()
+#include <stdio.h>   // for perror()
+
+int main(void)
+{
+    int fd;
+
+    // Test 1: Write to standard output (fd = 1)
+    ft_putendl_fd("Test 1: Hello, stdout!", 1);
+
+    // Test 2: Write to standard error (fd = 2)
+    ft_putendl_fd("Test 2: Hello, stderr!", 2);
+
+    // Test 3: Write NULL string (should do nothing)
+    ft_putendl_fd(NULL, 1);
+
+    // Test 4: Invalid file descriptor (should do nothing)
+    ft_putendl_fd("Test 4: Should not print!", -1);
+
+    // Test 5: Write to a file
+    fd = open("test_output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1)
+    {
+        perror("open");
+        return (1);
+    }
+    ft_putendl_fd("Test 5: This should be written into a file.", fd);
+    close(fd);
+
+    // Test 6: Empty string
+    ft_putendl_fd("", 1);
+
+    return (0);
+}*/
