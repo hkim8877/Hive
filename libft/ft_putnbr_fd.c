@@ -6,7 +6,7 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:57:05 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/25 13:57:07 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:38:27 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	get_nbr(unsigned int nbr, int fd)
 {
-	char c;
+	char	c;
 
 	if (nbr <= 0)
 		return ;
@@ -23,7 +23,7 @@ static void	get_nbr(unsigned int nbr, int fd)
 	write(fd, &c, 1);
 }
 
-void		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	nbr;
 

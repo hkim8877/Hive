@@ -6,7 +6,7 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 19:58:48 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/29 20:01:15 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:46:02 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*dst;
-	unsigned int		i;
-	size_t	s_len;
+	char			*dst;
+	unsigned int	i;
+	size_t			s_len;
 
 	s_len = ft_strlen(s);
 	if (s == NULL)

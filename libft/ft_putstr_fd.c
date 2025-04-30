@@ -6,13 +6,13 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:56:41 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/25 13:56:43 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:39:11 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s || fd < 0)
 		return ;

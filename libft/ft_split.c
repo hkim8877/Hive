@@ -6,7 +6,7 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:57:25 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/04/29 20:35:56 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:44:42 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static size_t	count_segments(char const *s, char c)
 }
 
 //frees all allocated memory in case of allocation failure
-static void	cleanup_memory(char **strs, size_t allocated_count)
+static void	*cleanup_memory(char **strs, size_t allocated_count)
 {
 	size_t	i;
 
@@ -50,6 +50,7 @@ static void	cleanup_memory(char **strs, size_t allocated_count)
 		i++;
 	}
 	free(strs);
+	return (NULL);
 }
 
 //extract one segment from the string
@@ -73,13 +74,11 @@ static char	*extract_segment(char const **s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	size_t	segment_count;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	segment_count = count_segments(s, c);
-	result = malloc(sizeof(char *) * (segment_count + 1));
+	result = malloc(sizeof(char *) * (count_segments(s, c) + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -89,10 +88,7 @@ char	**ft_split(char const *s, char c)
 		{
 			result[i] = extract_segment(&s, c);
 			if (!result[i])
-			{
-				cleanup_memory(result, i);
-				return (NULL);
-			}
+				return (cleanup_memory(result, i));
 			i++;
 		}
 		else
