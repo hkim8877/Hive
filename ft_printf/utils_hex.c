@@ -24,7 +24,7 @@ char *print_hex(unsigned int nbr)
 }
 	
 	/*while (len >= 0)
-	{
+	{ 
 		if ((write(1, &result[len], 1) == -1))
 			return (-1);
 		len--;
@@ -40,7 +40,7 @@ char *print_hex(unsigned int nbr)
 
 int main()
 {
-	unsigned int test = 22223;
+	unsigned int test = 42;
 	char *out[100];
 
 	print_hex(test);

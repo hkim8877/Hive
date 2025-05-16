@@ -12,24 +12,64 @@
 
 #include "ft_printf.h"
 
-int ft_printf_putchar(int c)
+int printf_putchar(int c)
 {
 	return (write(1, &c, 1));
 }
 
-int ft_printf_putstr(char *str)
+int printf_putstr(char *str)
 {
 	int len;
 
 	len = 0;
-	if (!str )
-		return (write(1, "(null)", 6));
+	if (!str)
+	{
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		return (6);
+	}
 	while (str[len] != '\0')
 	{
-		if (write(1, str[len], 1) == -1)
+		if (write(1, &str[len], 1) == -1)
 			return (-1);
 		len++;
 	}
 	return (len);
 }
 
+int printf_putnbr(int nbr)
+{
+	int i;
+
+	i = 0;
+	if (nbr == -2147483648)
+		return (write(1, "-2147483648", 11));
+	if (nbr < 0)
+	{
+		i += printf_putchar('-');
+		nbr *= (-1);
+	}
+	if (nbr > 9)
+	{
+		i += printf_putnbr(nbr / 10);
+		i += printf_putnbr(nbr % 10);
+	}
+	else
+		i += printf_putchar(nbr + '0');
+	return (i);
+}
+
+int printf_putnbr_usint(unsigned int nbr)
+{
+	int i;
+
+	i = 0;
+	if (nbr > 9)
+	{
+		i += printf_putnbr_usint(nbr / 10);
+		i += printf_putnbr_usint(nbr % 10); 
+	}
+	else
+		i += printf_putchar(nbr + '0');
+	return (i);
+}

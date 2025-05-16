@@ -42,22 +42,22 @@ int ft_printf(const char *format, ...)
 int ft_type(const char c, va_list *list)
 {
     if (c == 'c')
-        return (ft_printf_putchar(va_arg(*list, char)));
+        return (printf_putchar(va_arg(*list, char)));
     else if (c == 's')
-        return (ft_printf_putstr(va_arg(*list, char *)));
+        return (printf_putstr(va_arg(*list, char *)));
     else if (c == 'd')
-        return (ft_printf_putnbr(va_arg(*list, int)));
+        return (printf_putnbr(va_arg(*list, int)));
     else if (c == 'i')
-        return (ft_printf_putnbr(va_arg(*list, int)));
+        return (printf_putnbr(va_arg(*list, int)));
     else if (c == 'u')
-        return (ft_printf_putnbr_u(va_arg(*list, unsigned int)));
+        return (printf_putnbr_u(va_arg(*list, unsigned int)));
     else if (c == 'p')
-        return (ft_printf_pointer(va_arg(*list, unsigned long), c));
+        return (printf_pointer(va_arg(*list, unsigned long), c));
     else if (c == 'x')
-        return (ft_printf_hex(va_arg(*list, unsigned int)));
+        return (printf_hex(va_arg(*list, unsigned int)));
     else if (c == 'X')
-        return (ft_printf_hex_u(va_arg(*list, unsigned int)));
+        return (printf_hex_u(va_arg(*list, unsigned int)));
     else if (c == '%')
-        return (ft_printf_putchar('%'));
+        return (printf_putchar('%'));
     return (0);
 }
