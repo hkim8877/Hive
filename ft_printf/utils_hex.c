@@ -1,33 +1,41 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 
-ssize_t *ft_printf_hex(unsigned int nbr)
+static void *get_hex(unsigned int nbr)
 {
-	unsigned int len;
-	unsigned int re;
+	char num;
 
-	len = 0;
-	result = malloc(sizeof(char)*17 + 1);
-	while (nbr > 0)
+	//if (nbr < 0)
+	//	return ;
+	get_hex(nbr / 16);
+	num = nbr % 16 + '0';
+	write(1, &num, 1);
+}
+
+char *print_hex(unsigned int nbr)
+{
+	//if (nbr < 0)
+	//	return (-1);
+	if (nbr == 0)
 	{
-		result[len++] = hex[nbr % 16];
-		nbr = nbr / 16;
+		write(1, "0x", 2);
 	}
-	re = len;
-	while (len >= 0)
+	return (get_hex(nbr));
+}
+	
+	/*while (len >= 0)
 	{
 		if ((write(1, &result[len], 1) == -1))
 			return (-1);
 		len--;
-	}
-	return (re);
-}
+	}*/
 
-void *ft_printf_pointer(unsigned long int ptr)
+
+/*void *ft_printf_pointer(unsigned long int ptr)
 {
 	
 }
-
+*/
 #include <stdio.h>
 
 int main()
@@ -35,7 +43,7 @@ int main()
 	unsigned int test = 22223;
 	char *out[100];
 
-	printf("%i\n", ft_printf_hex(test));
+	print_hex(test);
 	//printf("%x\n", test);
 	return (0);
 }
