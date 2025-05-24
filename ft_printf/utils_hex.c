@@ -1,49 +1,31 @@
 #include "ft_printf.h"
-#include <stdlib.h>
 
-static void *get_hex(unsigned int nbr)
+int printf_lowhex(unsigned int nbr)
 {
-	char num;
+	int i;
 
-	//if (nbr < 0)
-	//	return ;
-	get_hex(nbr / 16);
-	num = nbr % 16 + '0';
-	write(1, &num, 1);
-}
-
-char *print_hex(unsigned int nbr)
-{
-	//if (nbr < 0)
-	//	return (-1);
-	if (nbr == 0)
+	i = 0;
+	if (nbr >= 16)
 	{
-		write(1, "0x", 2);
+		i += printf_lowhex(nbr / 16);
+		i += printf_lowhex(nbr % 16);
 	}
-	return (get_hex(nbr));
+	else
+		i += write(1, &(LO_HEX[nbr % 16]), 1);
+	return (i);
 }
-	
-	/*while (len >= 0)
-	{ 
-		if ((write(1, &result[len], 1) == -1))
-			return (-1);
-		len--;
-	}*/
 
-
-/*void *ft_printf_pointer(unsigned long int ptr)
+int printf_uphex(unsigned int nbr)
 {
+	int i;
 	
-}
-*/
-#include <stdio.h>
-
-int main()
-{
-	unsigned int test = 42;
-	char *out[100];
-
-	print_hex(test);
-	//printf("%x\n", test);
-	return (0);
+	i = 0;
+	if (nbr >= 16)
+	{
+		i += printf_uphex(nbr / 16);
+		i += printf_uphex(nbr % 16);
+	}
+	else
+		i += write(1, &(UP_HEX[nbr % 16]), 1);
+	return (i);
 }

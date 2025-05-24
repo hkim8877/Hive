@@ -50,13 +50,13 @@ int ft_type(const char c, va_list *list)
     else if (c == 'i')
         return (printf_putnbr(va_arg(*list, int)));
     else if (c == 'u')
-        return (printf_putnbr_u(va_arg(*list, unsigned int)));
+        return (printf_putnbr_usint(va_arg(*list, unsigned int)));
     else if (c == 'p')
         return (printf_pointer(va_arg(*list, unsigned long), c));
     else if (c == 'x')
-        return (printf_hex(va_arg(*list, unsigned int)));
+        return (printf_lowhex(va_arg(*list, unsigned int)));
     else if (c == 'X')
-        return (printf_hex_u(va_arg(*list, unsigned int)));
+        return (printf_uphex(va_arg(*list, unsigned int)));
     else if (c == '%')
         return (printf_putchar('%'));
     return (0);
