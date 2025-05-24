@@ -23,12 +23,13 @@ int ft_printf(const char *format, ...)
         return (-1);
     va_start(list, format);
     result = 0;
+    i = 0;
     while (*format)
     {
         if (*format == '%')
         {
             format++;
-            i = ft_type(&list, *format);
+            i = ft_type(*format, &list);
         }
         else
             i = printf_putchar(*format);
@@ -45,7 +46,7 @@ int ft_printf(const char *format, ...)
 int ft_type(const char c, va_list *list)
 {
     if (c == 'c')
-        return (printf_putchar(va_arg(*list, char)));
+        return (printf_putchar(va_arg(*list, int)));
     else if (c == 's')
         return (printf_putstr(va_arg(*list, char *)));
     else if (c == 'd')

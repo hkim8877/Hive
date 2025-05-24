@@ -24,6 +24,10 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+test: test.c
+	cc $< $(NAME) -o $@
+	./$@
+
 re: fclean all
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re test

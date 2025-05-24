@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int printf_putchar(char c)
+int printf_putchar(int c)
 {
 	return (write(1, &c, 1));
 }
@@ -58,7 +58,7 @@ int printf_putnbr(int nbr)
 	{
 		if (printf_putchar(nbr + '0') == -1)
 			return (-1);
-		i += printf_putchar(nbr + '0');
+		//i += printf_putchar(nbr + '0');
 	}	
 	return (i);
 }
