@@ -55,7 +55,11 @@ int printf_putnbr(int nbr)
 		i += printf_putnbr(nbr % 10);
 	}
 	else
+	{
+		if (printf_putchar(nbr + '0') == -1)
+			return (-1);
 		i += printf_putchar(nbr + '0');
+	}	
 	return (i);
 }
 
@@ -70,6 +74,10 @@ int printf_putnbr_usint(unsigned int nbr)
 		i += printf_putnbr_usint(nbr % 10);
 	}
 	else
+	{
+		if (printf_putchar(nbr + '0') == -1)
+			return (-1);
 		i += printf_putchar(nbr + '0');
+	}	
 	return (i);
 }

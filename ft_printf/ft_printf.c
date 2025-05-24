@@ -23,17 +23,20 @@ int ft_printf(const char *format, ...)
         return (-1);
     va_start(list, format);
     result = 0;
-    i = 0;
-    while (format[i])
+    while (*format)
     {
-        if (format[i] == '%')
+        if (*format == '%')
         {
-            result += ft_type(format[i + 1], &list);
-            i++;
+            format++;
+            i = ft_type(&list, *format);
         }
         else
-            result += ft_printf_char(format[i]);
-        i++;
+            i = printf_putchar(*format);
+        if (i == -1)
+            return (va_end(list), -1);
+        else
+            result += i;
+        format++;
     }
     va_end(list);
     return (result);
