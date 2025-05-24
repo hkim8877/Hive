@@ -56,4 +56,5 @@ int printf_pointer(unsigned long int ptr)
 	}
 	else
 		i += write(1, &LO_HEX[ptr % 16], 1);
+	return (i);
 }
