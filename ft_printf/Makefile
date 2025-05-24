@@ -1,6 +1,8 @@
 NAME := libftprintf.a
 
-SRCS :=
+SRCS := ft_printf.c \
+		utils_hex.c \
+		utils_put.c \
 
 OBJS := $(SRCS:%.c=%.o)
 

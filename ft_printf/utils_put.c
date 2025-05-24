@@ -67,7 +67,7 @@ int printf_putnbr_usint(unsigned int nbr)
 	if (nbr > 9)
 	{
 		i += printf_putnbr_usint(nbr / 10);
-		i += printf_putnbr_usint(nbr % 10); 
+		i += printf_putnbr_usint(nbr % 10);
 	}
 	else
 		i += printf_putchar(nbr + '0');
