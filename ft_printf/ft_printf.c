@@ -52,7 +52,7 @@ int ft_type(const char c, va_list *list)
     else if (c == 'u')
         return (printf_putnbr_usint(va_arg(*list, unsigned int)));
     else if (c == 'p')
-        return (printf_pointer(va_arg(*list, unsigned long), c));
+        return (printf_pointer(va_arg(*list, unsigned long)));
     else if (c == 'x')
         return (printf_lowhex(va_arg(*list, unsigned int)));
     else if (c == 'X')

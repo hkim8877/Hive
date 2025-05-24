@@ -42,7 +42,7 @@ int printf_uphex(unsigned int nbr)
 	return (i);
 }
 
-int printf_pointer(unsigned long int ptr)
+int printf_pointer(unsigned long ptr)
 {
 	int i;
 	
