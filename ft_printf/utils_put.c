@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   utils_put.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:23:57 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/05/14 13:23:58 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:01:18 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int printf_putchar(int c)
+int	printf_putchar(int c)
 {
 	return (write(1, &c, 1));
 }
 
-int printf_putstr(char *str)
+int	printf_putstr(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!str)
@@ -37,9 +37,10 @@ int printf_putstr(char *str)
 	return (len);
 }
 
-int printf_putnbr(int nbr)
+int	printf_putnbr(int nbr)
 {
-	int i;
+	int	i;
+	int	check;
 
 	i = 0;
 	if (nbr == -2147483648)
@@ -56,16 +57,18 @@ int printf_putnbr(int nbr)
 	}
 	else
 	{
-		if (printf_putchar(nbr + '0') == -1)
+		check = printf_putchar(nbr + '0');
+		if (check == -1)
 			return (-1);
-		//i += printf_putchar(nbr + '0');
-	}	
+		i += check;
+	}
 	return (i);
 }
 
-int printf_putnbr_usint(unsigned int nbr)
+int	printf_putnbr_usint(unsigned int nbr)
 {
-	int i;
+	int	i;
+	int	check;
 
 	i = 0;
 	if (nbr > 9)
@@ -75,9 +78,10 @@ int printf_putnbr_usint(unsigned int nbr)
 	}
 	else
 	{
-		if (printf_putchar(nbr + '0') == -1)
+		check = printf_putchar(nbr + '0');
+		if (check == -1)
 			return (-1);
-		i += printf_putchar(nbr + '0');
-	}	
+		i += check;
+	}
 	return (i);
 }
