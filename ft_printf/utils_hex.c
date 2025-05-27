@@ -6,7 +6,7 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 14:53:49 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/05/26 13:59:59 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:09:22 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	printf_lowhex(uintptr_t nbr)
 {
 	int	i;
-	int check;
+	int	check;
 
 	i = 0;
 	if (nbr >= 16)
@@ -40,16 +40,15 @@ int	printf_uphex(uintptr_t nbr)
 	i = 0;
 	if (nbr >= 16)
 	{
-		i += printf_uphex(nbr / 16);
-		i += printf_uphex(nbr % 16);
-	}
-	else
-	{
-		check = write(1, &(UP_HEX[nbr % 16]), 1);
+		check = printf_uphex(nbr / 16);
 		if (check == -1)
 			return (-1);
 		i += check;
 	}
+	check = write(1, &(UP_HEX[nbr % 16]), 1);
+	if (check == -1)
+		return (-1);
+	i += check;
 	return (i);
 }
 
