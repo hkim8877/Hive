@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...)
 	result = 0;
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && (*format +1) != '\0')
 		{
 			format++;
 			i = ft_type(*format, &list);
@@ -63,5 +63,5 @@ int	ft_type(const char c, va_list *list)
 		return (printf_uphex(va_arg(*list, unsigned int)));
 	else if (c == '%')
 		return (printf_putchar('%'));
-	return (0);
+	return (-1);
 }
