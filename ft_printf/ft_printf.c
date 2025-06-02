@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...)
 	result = 0;
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '\0')
+		if (*format == '%')
 		{
 			format++;
 			i = ft_type(*format, &list);
