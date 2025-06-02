@@ -1,3 +1,5 @@
+#include "get_next_line.h"
+
 int ft_strlen(const char *str)
 {
 	int len;
@@ -48,5 +50,23 @@ char *ft_strdup(const char *src)
 
 char *ft_strjoin(const char *s1, const char *s2)
 {
-	
+	char *dest;
+	char *result;
+	size_t s1_len;
+	size_t s2_len;
+
+	if (s1 == 0 || s2 == 0)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	dest = (char *)malloc(s1_len + s2_len + 1);
+	if (!dest)
+		return (NULL);
+	result = dest;
+	while (*s1)
+		*dest++ = *s1++;
+	while (*s2)
+		*dest++ = *s2++;
+	*dest = '\0';
+	return (result);	
 }
