@@ -1,8 +1,8 @@
 #include "get_next_line.h"
 
-int ft_strlen(const char *str)
+size_t ft_strlen(const char *str)
 {
-	int len;
+	size_t len;
 
 	len = 0;
 	if (!str)
