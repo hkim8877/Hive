@@ -13,7 +13,7 @@ static char *read_file(int fd, char *lines)
 	while (byte > 0 && !ft_strchr(lines, '\n'))
 	{
 		byte = read (fd, buffer, BUFFER_SIZE);
-		if (byte < 0)
+		if (byte == -1)
 		{
 			free(buffer);
 			return (NULL);
@@ -47,10 +47,15 @@ static char *update_lines(char *lines)
 	int i;
 
 	i = 0;
-	/*if(!lines || lines[0] == '\0')
-		return (NULL);*/
+	if(!lines || lines[0] == '\0')
+		return (NULL);
 	while (lines[i] && lines[i] != '\n')
 		i++;
+	if (!lines[i])
+	{
+		free(lines);
+		return (NULL);
+	}
 	new_lines = ft_strdup(&lines[i + 1]);
 	free (lines);
 	return (new_lines);
@@ -66,6 +71,12 @@ char *get_next_line(int fd)
 	if (!lines)
 		return (NULL);
 	next_line = extract_lines(lines);
+	if (!next_line)
+	{
+		free(lines);
+		lines = NULL;
+		return (NULL);
+	}
 	lines = update_lines(lines);
 	return (next_line);
 }
