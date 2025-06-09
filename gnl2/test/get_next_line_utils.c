@@ -26,7 +26,27 @@ char *ft_strchr(const char *str, int c)
 		return ((char *)str);
 	return (NULL);
 }
+char *ft_strdup(const char *src)
+{
+	int len;
+	int i;
+	char *dest;
 
+	if (!src)
+		return (NULL);
+	len = ft_strlen(src);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 char *ft_strjoin(const char *s1, const char *s2)
 {
 	char *dest;
@@ -74,18 +94,4 @@ char *ft_substr(const char *s, unsigned int start, size_t len)
 	}
 	dest[i] = '\0';
 	return ((char *)dest);
-}
-char *gnl_strjoin(char *s1, const char *s2)
-{
-	char *joined;
-
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_substr(s2, 0, ft_strlen(s2)));
-	if (!s2)
-		return (ft_substr(s1, 0, ft_strlen(s1)));
-	joined = ft_strjoin(s1, s2);
-	free(s1);
-	return (joined);
 }
