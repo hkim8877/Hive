@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:35:05 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/06/09 16:39:49 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:54:51 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static int	read_file(int fd, char *buffer)
+static int	read_file(int fd, char buffer[MAX_FD][BUFFER_SIZE + 1])
 {
 	ssize_t	byte;
 
-	byte = read(fd, buffer, BUFFER_SIZE);
+	byte = read(fd, buffer[fd], BUFFER_SIZE);
 	if (byte == -1)
 		return (0);
-	buffer[byte] = '\0';
+	buffer[fd][byte] = '\0';
 	return (byte);
 }
 
@@ -55,7 +55,7 @@ static void	update_lines(char *buffer)
 	buffer[j] = '\0';
 }
 
-static char	*gnl_from_buffer(int fd, char *buffer)
+static char	*gnl_from_buffer(int fd, char buffer[MAX_FD][BUFFER_SIZE + 1])
 {
 	char	*next_line;
 	char	*temp;
@@ -63,16 +63,16 @@ static char	*gnl_from_buffer(int fd, char *buffer)
 	next_line = NULL;
 	while (1)
 	{
-		if (*buffer)
+		if (*buffer[fd])
 		{
-			temp = extract_lines(buffer);
+			temp = extract_lines(buffer[fd]);
 			if (!temp)
 				return (free(next_line), NULL);
 			next_line = gnl_strjoin(next_line, temp);
 			free(temp);
 			if (ft_strchr(next_line, '\n'))
 			{
-				update_lines(buffer);
+				update_lines(buffer[fd]);
 				break ;
 			}
 		}
@@ -86,9 +86,9 @@ static char	*gnl_from_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[MAX_FD][BUFFER_SIZE + 1];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD - 1 || MAX_FD < 1)
 		return (NULL);
 	return (gnl_from_buffer(fd, buffer));
 }
