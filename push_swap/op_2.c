@@ -1,17 +1,5 @@
 #include "push_swap.h"
 
-void stack_init(t_stack *stack, int value)
-{
-    if (!stack)
-        return ;
-    t_node *new_node = malloc(sizeof(t_node));
-   
-    new_node->value = value;
-    new_node->next = NULL;
-    stack->top = new_node;
-    stack->size++;
-}
-
 void push(t_stack **dest, t_stack **src)
 {
     t_node *push;
@@ -23,7 +11,6 @@ void push(t_stack **dest, t_stack **src)
     push->next = (*dest)->top;
     (*dest)->top = push;
 }
-
 void swap(t_stack *stack)
 {
     if (stack->size < 2) 

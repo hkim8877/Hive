@@ -1,11 +1,12 @@
 NAME := push_swap
 
-SRCS := op_1.c \
+SRCS := push_swap.c \
+	op_1.c \
 	op_2.c \
 	utils.c \
 	quicksort.c \
 	greedy.c \
-	error_check.c \
+	parse_error.c \
 	ft_split.c \
 	main.c
 

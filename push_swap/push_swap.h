@@ -65,7 +65,10 @@ void push_swap(t_stack *a, t_stack *b);
 
 // Parsing
 char			**ft_split(char const *s, char c);
-int ft_atol(const char *str);
+int ft_atol(char *str);
 void stack_init(t_stack *stack, int value);
+void    free_stack(t_stack **stack);
+int check_error(char *str);
+int clean_exit(t_stack **a, t_stack **b, char **split, int exit_code);
 
 #endif
