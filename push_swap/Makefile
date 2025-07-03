@@ -1,6 +1,13 @@
-NAME := push_swap.a
+NAME := push_swap
 
-SRCS := 
+SRCS := op_1.c \
+	op_2.c \
+	utils.c \
+	quicksort.c \
+	greedy.c \
+	error_check.c \
+	ft_split.c \
+	main.c
 
 OBJS := $(SRCS:%.c=%.o)
 
@@ -9,7 +16,7 @@ HEADERS := push_swap.h
 CFLAGS = -Wall -Wextra -Werror
 
 $(NAME) : $(OBJS)
-	ar -rcs $@ $^
+	cc $(CFLAGS) -o $@ $^
 
 %.o: %.c $(HEADERS)
 	cc -c $< -o $@ $(CFLAGS)
@@ -22,10 +29,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-test: test.c
-	cc $< $(NAME) -o $@
-	./$@
-
 re: fclean all
 
-.PHONY: clean fclean all re test
+.PHONY: clean fclean all re
