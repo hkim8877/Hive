@@ -10,7 +10,10 @@ void push(t_stack **dest, t_stack **src)
     (*src)->top = (*src)->top->next;
     push->next = (*dest)->top;
     (*dest)->top = push;
+    (*dest)->size++;
+    (*src)->size--;
 }
+
 void swap(t_stack *stack)
 {
     if (stack->size < 2) 
@@ -24,7 +27,9 @@ void rotate(t_stack *stack)
 {
     if (stack->size < 2) 
         return;
-    t_node *last = stack->top;
+    t_node *last;
+    
+    last = stack->top;
     while (last->next) 
         last = last->next;
     last->next = stack->top;
@@ -36,8 +41,11 @@ void reverse_rotate(t_stack *stack)
 {
     if (stack->size < 2) 
         return;
-    t_node *last = stack->top;
-    t_node *prev = NULL;
+    t_node *last;
+    t_node *prev;
+
+    last = stack->top;
+    prev = NULL;
     while (last->next)
     {
         prev = last;

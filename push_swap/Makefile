@@ -3,10 +3,13 @@ NAME := push_swap
 SRCS := push_swap.c \
 	op_1.c \
 	op_2.c \
-	utils.c \
+	utils_1.c \
+	utils_2.c \
+	error.c \
+	ft_atol.c \
 	quicksort.c \
 	greedy.c \
-	parse_error.c \
+	stack.c \
 	ft_split.c \
 	main.c
 

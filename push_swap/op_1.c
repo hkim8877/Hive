@@ -2,20 +2,24 @@
 
 void sa(t_stack *a)
 { 
+    if (a->size < 2)
+         return;
     swap(a);
     write(1, "sa\n", 3);
 }
 
 void sb(t_stack *b)
 { 
+    if (b->size <2)
+        return;
     swap(b);
     write(1, "sb\n", 3);
 }
 
 void ss(t_stack *a, t_stack *b)
 { 
-    sa(a);
-    sb(b);
+    swap(a);
+    swap(b);
     write(1, "ss\n", 3);
 }
 
@@ -49,8 +53,8 @@ void rb(t_stack *b)
 
 void rr(t_stack *a, t_stack *b)
 {
-    ra(a);
-    rb(b);
+    rotate(a);
+    rotate(b);
     write(1, "rr\n", 3);
 }
 
@@ -68,7 +72,7 @@ void rrb(t_stack *b)
 
 void rrr(t_stack *a, t_stack *b)
 {
-    rra(a);
-    rrb(b);
+    reverse_rotate(a);
+    reverse_rotate(b);
     write(1, "rrr\n", 4);
 }
