@@ -8,6 +8,20 @@ static int ft_isdigit(int c)
 {
     return (c >= '0' && c <= '9');
 }
+static int check_error(char *str)
+{
+    if (*str == '+' || *str == '-')
+        str++;
+    if (!ft_isdigit(*str))
+        return (1);
+    while (*str)
+    {
+        if (!ft_isdigit(*str))
+            return (1);
+        str++;
+    }
+    return (0);
+}
 
 int ft_atol(char *str)
 {
@@ -36,17 +50,3 @@ int ft_atol(char *str)
     return ((int)(result * sign));
 }
 
-int check_error(char *str)
-{
-    if (*str == '+' || *str == '-')
-        str++;
-    if (!ft_isdigit(*str))
-        return (1);
-    while (*str)
-    {
-        if (!ft_isdigit(*str))
-            return (1);
-        str++;
-    }
-    return (0);
-}

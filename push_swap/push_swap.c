@@ -30,10 +30,10 @@ void sort_small(t_stack *a)
         sort_three(a);
 }
 
-void sort_five(t_stack *a, t_stack *b)
-{
+// void sort_five(t_stack *a, t_stack *b)
+// {
     
-}
+// }
 
 void push_swap(t_stack *a, t_stack *b)
 {
@@ -42,11 +42,11 @@ void push_swap(t_stack *a, t_stack *b)
         sort_small(a);
         return;
     }
-    if (a->size == 4 || a->size == 5)
-    {
-        sort_five(a);
-        return;
-    }
+    // if (a->size == 4 || a->size == 5)
+    // {
+    //     sort_five(a);
+    //     return;
+    // }
     quicksort(a, b, a->size);
     while (b->size > 0)
         greedy_insert(a, b);

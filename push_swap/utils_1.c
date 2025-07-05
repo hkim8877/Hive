@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void bubble_sort(int *arr, int len)
+static void bubble_sort(int *arr, int len)
 {
     int i;
     int swap;
@@ -61,6 +61,15 @@ int rotation_cost(t_stack *stack, int index)
         return (index); 
     else
         return (index - size); 
+}
+
+int abs(int c)
+{
+    if (c < 0)
+    {
+        c *= -1;
+    }
+    return (c);
 }
 
 // int get_pivot(t_stack *stack, int len)

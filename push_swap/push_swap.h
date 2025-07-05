@@ -51,22 +51,18 @@ int rotation_cost(t_stack *stack, int index);
 int stack_min(t_stack *stack);
 int stack_max(t_stack *stack);
 int stack_size(t_stack *stack);
+int abs(int c);
+int get_pivot(t_stack *stack, int len);
+void run_cmd(t_stack *a, t_stack *b, t_cost cost);
+t_cost calculate_move(t_stack *a, t_stack *b, int value);
 
 //Algorithm
 void sort_three(t_stack *a);
-void sort_five(t_stack *a, t_stack *b);
-t_cost calculate_move(t_stack *a, t_stack *b, int value);
-void run_cmd(t_stack *a, t_stack *b, t_cost cost);
-void greedy_insert(t_stack *a, t_stack *b);
-void quicksort(t_stack *a, t_stack *b, int len);
 void sort_small(t_stack *a);
+// void sort_five(t_stack *a, t_stack *b);
+void quicksort(t_stack *a, t_stack *b, int len);
+void greedy_insert(t_stack *a, t_stack *b);
 void push_swap(t_stack *a, t_stack *b);
-void partition(t_stack *a, t_stack *b, int len, int *pushed, int *rotations);
-void quick_rotations(t_stack *a, int len, int rotations);
-void bubble_sort(int *arr, int len);
-int get_pivot(t_stack *stack, int len);
-void individual_rotations(t_stack *a, t_stack *b, int a_cost, int b_cost);
-void combined_rotations(t_stack *a, t_stack *b, int *a_cost, int *b_cost);
 
 // Parsing
 char			**ft_split(char const *s, char c);
@@ -74,7 +70,6 @@ int ft_atol(char *str);
 void stack_init(t_stack *stack, int value);
 t_stack *stack_create(void);
 void    free_stack(t_stack **stack);
-int check_error(char *str);
 int clean_exit(t_stack **a, t_stack **b, char **split, int exit_code);
 int check_duplicate(t_stack *a, int c);
 void error(void);

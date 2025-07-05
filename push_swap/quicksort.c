@@ -1,29 +1,8 @@
 #include "push_swap.h"
 
-void quicksort(t_stack *a, t_stack *b, int len)
-{
-    int pivot; 
-    int pushed;
-    int rotations;
 
-    if (len <= 1 || is_sorted(a))
-        return;
-    pivot = get_pivot(a, len);
-    pushed = 0;
-    rotations = 0;
-    partition(a, b, len, &pushed, &rotations);
-    quick_rotations(a, len, rotations);
-    quicksort(a, b, len - pushed);
-    if (pushed <= 3)
-        sort_small_stack(b);
-    else
-        quicksort(b, a, pushed);
-    
-    while (pushed--)
-        pa(&a, &b);
-}
 
-void partition(t_stack *a, t_stack *b, int len, int *pushed, int *rotations)
+static void partition(t_stack *a, t_stack *b, int len, int *pushed, int *rotations)
 {
     int count;
     int pivot;
@@ -45,7 +24,7 @@ void partition(t_stack *a, t_stack *b, int len, int *pushed, int *rotations)
     }
 }
 
-void quick_rotations(t_stack *a, int len, int rotations)
+static void quick_rotations(t_stack *a, int len, int rotations)
 {
     int j;
 
@@ -62,6 +41,29 @@ void quick_rotations(t_stack *a, int len, int rotations)
     }
 }
 
+void quicksort(t_stack *a, t_stack *b, int len)
+{
+    int pivot; 
+    int pushed;
+    int rotations;
+
+    if (len <= 1 || is_sorted(a))
+        return;
+    pivot = get_pivot(a, len);
+    pushed = 0;
+    rotations = 0;
+    partition(a, b, len, &pushed, &rotations);
+    quick_rotations(a, len, rotations);
+    quicksort(a, b, len - pushed);
+    if (pushed <= 3)
+        sort_small(b);
+    else
+        quicksort(b, a, pushed);
+    
+    while (pushed--)
+        pa(&a, &b);
+}
+
 // void quicksort(t_stack *a, t_stack *b, int len)
 // {
 //     if (len <= 1 || is_sorted(a))
@@ -69,7 +71,7 @@ void quick_rotations(t_stack *a, int len, int rotations)
 //     int pivot; 
 //     int pushed;
 //     int rotations;
-//     int count;
+//     int count;make 
 //     int j;
 
 //     pivot = = get_pivot(a, len);
