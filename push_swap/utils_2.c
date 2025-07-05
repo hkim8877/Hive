@@ -19,34 +19,63 @@ int find_index(t_stack **stack, int value)
     return (-1);
 }
 
-int find_target_index(t_stack **stack, int value)
+int find_target_index_a(t_stack **a, int value)
 {
-    if (!stack)
-        return (0);
-    int target;
-    int min;
-    int max;
-    t_stack *current;
+    if (!*a)
+        return 0;
 
-    target = 0;
-    min = stack_min(stack);
-    max = stack_max(stack);
-    if (value < min || value > max)
-        return (find_index(stack, min));
-    current = *stack;
-    while (current->next)
+    t_stack *current = *a;
+    t_stack *next;
+    int target = 0;
+    int a_size = stack_size(a);
+    int i = 0;    
+    while (i < a_size)
     {
-        if (value > current->value && value < current->next->value)
+        next = current->next;
+        if (!next)
+            next = *a; 
+        if (value > current->value && value < next->value)
+            return (target + 1);
+        if (current->value > next->value && (value > current->value || value < next->value))
             return (target + 1);
         current = current->next;
         target++;
+        i++;
     }
-    return (0);
+    return (find_index(a, stack_min(a)));
 }
+int find_target_index_b(t_stack **b, int value)
+{
+     if (!*b)
+        return (0);
+    int target;
+    int b_size;
+    int i;
+    t_stack *current;
+    t_stack *next;
 
+    target = 0;
+    b_size = stack_size(b);
+    current = *b;
+    i = 0;
+    while (i < b_size)
+    {
+        next = current->next;
+        if(!next)
+            next = *b;
+        if (value < current->value && value > next->value)
+            return (target + 1);
+        if (current->value < next->value && (value < current->value || value > next->value))
+            return (target + 1);
+        current = current->next;
+        target++;
+        i++;
+    }
+    return (find_index(b, stack_max(b)));
+}
 int stack_min(t_stack **stack)
 {
-    if (!stack)
+    if (!stack || !*stack)
         return (INT_MAX);
     int min;
     t_stack *current;
@@ -64,7 +93,7 @@ int stack_min(t_stack **stack)
 
 int stack_max(t_stack **stack)
 {
-    if (!stack)
+    if (!stack || !*stack)
         return INT_MIN;
     int max;
     t_stack *current;
@@ -82,7 +111,7 @@ int stack_max(t_stack **stack)
 
 int stack_size(t_stack **stack)
 {
-    if (!stack)
+    if (!stack || !*stack)
         return (0);
     int size;
     t_stack *current;

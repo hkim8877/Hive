@@ -8,7 +8,6 @@ SRCS := push_swap.c \
 	utils_2.c \
 	error.c \
 	ft_atol.c \
-	quicksort.c \
 	greedy.c \
 	stack.c \
 	main.c

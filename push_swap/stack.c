@@ -17,13 +17,11 @@ t_stack **stack_init(t_stack **stack, int value)
     if (!*stack)
     {
         *stack = new_node;
-        new_node->size = 1;
     }
     else
     {
         prev = last(*stack);
         prev->next = new_node;
-        (*stack)->size += 1;
     }
     update_idx(*stack);
     return (stack);

@@ -8,7 +8,7 @@ void rrr(t_stack **a, t_stack **b)
 }
 void push(t_stack **dest, t_stack **src)
 {
-    if (!*src || !(*src))
+    if (!*src)
         return ;
     t_stack *push;
     
@@ -16,16 +16,13 @@ void push(t_stack **dest, t_stack **src)
     *src = (*src)->next;
     push->next = *dest;
     *dest = push;
-    (*dest)->size = (*dest)->size + 1;
-    (*src)->size = (*src)->size - 1;
     update_idx(*dest);
     update_idx(*src);
-    
 }
 
 void swap(t_stack **stack)
 {
-     if (!stack || !*stack || !(*stack)->next) 
+     if (!*stack || !(*stack)->next) 
         return;
     t_stack *first;
     t_stack *second;
@@ -44,7 +41,7 @@ void swap(t_stack **stack)
 
 void rotate(t_stack **stack)
 {
-    if (!stack || !*stack || !(*stack)->next) 
+    if (!*stack || !(*stack)->next) 
         return;
     t_stack *first;
     t_stack *last;
@@ -68,7 +65,7 @@ void rotate(t_stack **stack)
 
 void reverse_rotate(t_stack **stack)
 {
-    if (!stack || !*stack || !(*stack)->next) 
+    if (!*stack || !(*stack)->next) 
         return;
     t_stack *last;
     t_stack *prev;

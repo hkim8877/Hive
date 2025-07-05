@@ -2,14 +2,14 @@
 
 void sa(t_stack **a)
 { 
-    if ((*a)->size < 2)
+    if ((stack_size(a) < 2))
          return;
     swap(a);
     write(1, "sa\n", 3);
 }
 void sb(t_stack **b)
 { 
-    if ((*b)->size <2)
+    if (stack_size(b) <2)
         return;
     swap(b);
     write(1, "sb\n", 3);

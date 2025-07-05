@@ -40,52 +40,116 @@ static void individual_rotations(t_stack **a, t_stack **b)
 }
 void run_cmd(t_stack **a, t_stack **b)
 {
-    int tmp_a;
-    int tmp_b;
-
-    tmp_a = (*a)->cost;
-    tmp_b = (*b)->cost;;
     combined_rotations(a, b);
     individual_rotations(a, b);
 }
-int push_cost(t_stack **a, t_stack **b, int value)
+t_costs push_cost_b(t_stack **a, t_stack **b, int value_to_push)
 {
-    int push_cost;
+    t_costs result;
+    int a_idx_for_value;
+    int b_target_idx;
 
-    (*b)->index = find_index(b, value);
-    (*a)->index = find_target_index(a, value);
-    (*a)->cost = rotation_cost(a, (*a)->index);
-    (*b)->cost = rotation_cost(b, (*b)->index);
-    if (((*a)->cost > 0 && (*b)->cost > 0) || ((*a)->cost < 0 && (*b)->cost < 0))
+    a_idx_for_value = find_index(a, value_to_push);
+    b_target_idx = find_target_index_b(b, value_to_push);
+    result.a_rot_cost = rotation_cost(a, a_idx_for_value);
+    result.b_rot_cost = rotation_cost(b, b_target_idx);
+
+    if ((result.a_rot_cost > 0 && result.b_rot_cost > 0) || (result.a_rot_cost < 0 && result.b_rot_cost < 0))
     {
-        if (abs((*a)->cost) > abs((*b)->cost))
-            push_cost = abs((*a)->cost);
+        if (abs(result.a_rot_cost) > abs(result.b_rot_cost))
+            result.total_cost = abs(result.a_rot_cost);
         else
-            push_cost = abs((*b)->cost);
+            result.total_cost = abs(result.b_rot_cost);
     }
     else
-        push_cost = abs((*a)->cost) + abs((*b)->cost);
-    return (push_cost);
-}
-void greedy_insert(t_stack **a, t_stack **b)
-{
-    int best;
-    int tmp;
-    t_stack *current;
-    int min_cost;
-    
-    min_cost = INT_MAX;
-    current = *b;
-    while (current)
     {
-        tmp = push_cost(a, b, current->value);
-        if (tmp < min_cost)
-        {
-            min_cost = tmp;
-            best = tmp;
-        }
-        current = current->next;
+        result.total_cost = abs(result.a_rot_cost) + abs(result.b_rot_cost);
     }
+    return (result);
+}
+t_costs push_cost_a(t_stack **a, t_stack **b, int value_to_push)
+{
+    t_costs result;
+    int b_idx_for_value;
+    int a_target_idx;
+
+    b_idx_for_value = find_index(b, value_to_push);
+    a_target_idx = find_target_index_a(a, value_to_push);
+    result.a_rot_cost = rotation_cost(a, a_target_idx);
+    result.b_rot_cost = rotation_cost(b, b_idx_for_value);
+
+    if ((result.a_rot_cost > 0 && result.b_rot_cost > 0) || (result.a_rot_cost < 0 && result.b_rot_cost < 0))
+    {
+        if (abs(result.a_rot_cost) > abs(result.b_rot_cost))
+            result.total_cost = abs(result.a_rot_cost);
+        else
+            result.total_cost = abs(result.b_rot_cost);
+    }
+    else
+    {
+        result.total_cost = abs(result.a_rot_cost) + abs(result.b_rot_cost);
+    }
+    return (result);
+}
+void greedy_insert_b(t_stack **a, t_stack **b)
+{
+    t_stack             *current_a_node;
+    int                 min_total_cost;
+    int                 best_a_rot_cost; 
+    int                 best_b_rot_cost;
+    t_costs  current_costs;
+
+    min_total_cost = INT_MAX;
+    best_a_rot_cost = 0;
+    best_b_rot_cost = 0;
+    current_a_node = *a; 
+    while (current_a_node)
+    {
+        current_costs = push_cost_b(a, b, current_a_node->value);        
+        if (current_costs.total_cost < min_total_cost)
+        {
+            min_total_cost = current_costs.total_cost;
+            best_a_rot_cost = current_costs.a_rot_cost;
+            best_b_rot_cost = current_costs.b_rot_cost;
+        }
+        current_a_node = current_a_node->next;
+    }
+    if (*a)
+        (*a)->cost = best_a_rot_cost;
+    if (*b)
+        (*b)->cost = best_b_rot_cost;
+    run_cmd(a, b);
+    pb(a, b);      
+}
+
+void greedy_insert_a(t_stack **a, t_stack **b)
+{
+    t_stack             *current_b_node;
+    int                 min_total_cost;
+    int                 best_a_rot_cost;
+    int                 best_b_rot_cost;
+    t_costs  current_costs;
+
+    min_total_cost = INT_MAX;
+    best_a_rot_cost = 0;
+    best_b_rot_cost = 0;
+    current_b_node = *b;
+    while (current_b_node)
+    {
+        current_costs = push_cost_a(a, b, current_b_node->value);
+        
+        if (current_costs.total_cost < min_total_cost)
+        {
+            min_total_cost = current_costs.total_cost;
+            best_a_rot_cost = current_costs.a_rot_cost;
+            best_b_rot_cost = current_costs.b_rot_cost;
+        }
+        current_b_node = current_b_node->next;
+    }
+    if (*a)
+        (*a)->cost = best_a_rot_cost;
+    if (*b)
+        (*b)->cost = best_b_rot_cost;
     run_cmd(a, b);
     pa(a, b);
 }

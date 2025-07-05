@@ -4,15 +4,22 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_stack
 {
     int value;
-    int size;
     int index;
     int cost;
     struct s_stack *next;
 } t_stack;
+
+typedef struct s_costs
+{
+    int total_cost;
+    int a_rot_cost;
+    int b_rot_cost;
+} t_costs;
 
 // Push Swap operations
 void sa(t_stack **a);
@@ -34,23 +41,27 @@ void reverse_rotate(t_stack **stack);
 // Utils
 int is_sorted(t_stack **stack);
 int find_index(t_stack **stack, int value);
-int find_target_index(t_stack **stack, int value);
+int find_target_index_a(t_stack **stack, int value);
+int find_target_index_b(t_stack **stack, int value);
 int rotation_cost(t_stack **stack, int index);
 int stack_min(t_stack **stack);
 int stack_max(t_stack **stack);
 int stack_size(t_stack **stack);
-int abs(int c);
-int get_pivot(t_stack *stack, int len);
+int ft_abs(int c);
+// int get_pivot(t_stack *stack, int len);
 void run_cmd(t_stack **a, t_stack **b);
-int push_cost(t_stack **a, t_stack **b, int value);
+t_costs push_cost_b(t_stack **a, t_stack **b, int value_to_push);
+t_costs push_cost_a(t_stack **a, t_stack **b, int value_to_push);
 void update_idx(t_stack *stack);
 
 //Algorithm
 void sort_three(t_stack **a);
+void sort_four(t_stack **a, t_stack **b);
 void sort_small(t_stack **a);
 // void sort_five(t_stack **a, t_stack **b);
-void quicksort(t_stack **a, t_stack **b, int len);
-void greedy_insert(t_stack **a, t_stack **b);
+// void quicksort(t_stack **a, t_stack **b, int len);
+void greedy_insert_a(t_stack **a, t_stack **b);
+void greedy_insert_b(t_stack **a, t_stack **b);
 void push_swap(t_stack **a, t_stack **b);
 
 // Parsing
