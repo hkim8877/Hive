@@ -1,30 +1,18 @@
-#ifndef STACK_H
-# define STACK_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
 
-typedef struct s_node
-{
-    int value;
-    struct s_node *next;
-} t_node;
-
 typedef struct s_stack
 {
-    t_node *top;
+    int value;
     int size;
+    int index;
+    int cost;
+    struct s_stack *next;
 } t_stack;
-
-typedef struct s_cost
-{
-    int a_index;
-    int b_index;
-    int a_cost;
-    int b_cost;
-    int push_cost;
-} t_cost;
 
 // Push Swap operations
 void sa(t_stack *a);
@@ -65,13 +53,13 @@ void greedy_insert(t_stack *a, t_stack *b);
 void push_swap(t_stack *a, t_stack *b);
 
 // Parsing
-char			**ft_split(char const *s, char c);
 int ft_atol(char *str);
 void stack_init(t_stack *stack, int value);
 t_stack *stack_create(void);
 void    free_stack(t_stack **stack);
 int clean_exit(t_stack **a, t_stack **b, char **split, int exit_code);
-int check_duplicate(t_stack *a, int c);
+int check_duplicate(t_stack *a);
 void error(void);
+int cleanup_and_error(t_stack **a, t_stack **b);
 
 #endif

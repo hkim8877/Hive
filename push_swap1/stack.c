@@ -14,8 +14,6 @@ t_stack *stack_create(void)
 
 void stack_init(t_stack *stack, int value)
 {
-    if (check_duplicate(stack, value))
-        error();
     t_node *new_node;
     
     new_node = malloc(sizeof(t_node));
@@ -25,7 +23,6 @@ void stack_init(t_stack *stack, int value)
     new_node->next = stack->top;
     stack->top = new_node;
     stack->size++;
-
 }
 
 void    free_stack(t_stack **stack)

@@ -42,29 +42,32 @@ void push_swap(t_stack *a, t_stack *b)
         sort_small(a);
         return;
     }
+    while (a->size > 3)
+        quicksort(a, b, a->size);
+    sort_small(a);
     // if (a->size == 4 || a->size == 5)
     // {
     //     sort_five(a);
     //     return;
     // }
-    quicksort(a, b, a->size);
-    while (b->size > 0)
-        greedy_insert(a, b);
-    int min_pos;
-    int cost;
     
-    min_pos = find_index(a, INT_MIN);
-    cost = rotation_cost(a, min_pos);
-    while (cost > 0)
-    { 
-            ra(a); 
-            cost--;
-    }
-    while (cost < 0)
-    { 
-        rra(a);
-        cost++;
-    }
+    // while (b->size > 0)
+    //     greedy_insert(a, b);
+    // int min_pos;
+    // int cost;
+    
+    // min_pos = find_index(a, INT_MIN);
+    // cost = rotation_cost(a, min_pos);
+    // while (cost > 0)
+    // { 
+    //         ra(a); 
+    //         cost--;
+    // }
+    // while (cost < 0)
+    // { 
+    //     rra(a);
+    //     cost++;
+    // }
 }
 
 // void push_swap(t_stack *a, t_stack *b)

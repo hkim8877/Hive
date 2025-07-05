@@ -12,21 +12,23 @@ int main(int argc, char **argv)
     b = stack_create();
     if (!a || !b)
         return (1);
-    if (argc == 2)
-    {
-        argv = ft_split(argv[1], ' ');
-        argc = 0;
-        while (argv[argc])
-            argc++;
-        i = 0;
-     }
-    else
-        i = 1;
+    // if (argc == 2)
+    // {
+    //     argv = ft_split(argv[1], ' ');
+    //     argc = 0;
+    //     while (argv[argc])
+    //         argc++;
+    //     i = 0;
+    //  }
+    // else
+    i = 1;
     while (i < argc)
     {
         stack_init(a, ft_atol(argv[i]));
         i++;
     }
+    if (check_duplicate(a))
+        return(cleanup_and_error(&a, &b));
     if (!is_sorted(a))
         push_swap(a, b);
     free_stack(&a);
