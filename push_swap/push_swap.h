@@ -41,8 +41,8 @@ int stack_max(t_stack *stack);
 int stack_size(t_stack *stack);
 int abs(int c);
 int get_pivot(t_stack *stack, int len);
-void run_cmd(t_stack *a, t_stack *b, t_cost cost);
-t_cost calculate_move(t_stack *a, t_stack *b, int value);
+void run_cmd(t_stack *a, t_stack *b);
+int push_cost(t_stack *a, t_stack *b, int value);
 
 //Algorithm
 void sort_three(t_stack *a);
