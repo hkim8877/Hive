@@ -10,8 +10,6 @@ int main(int argc, char **argv)
     
     a = NULL;
     b = NULL;
-    if (!a || !b)
-        return (1);
     i = 1;
     while (i < argc)
     {
