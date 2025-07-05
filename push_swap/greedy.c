@@ -78,7 +78,7 @@ void greedy_insert(t_stack **a, t_stack **b)
     current = *b;
     while (current)
     {
-        tmp = push_cost(&a, &b, current->value);
+        tmp = push_cost(a, b, current->value);
         if (tmp < min_cost)
         {
             min_cost = tmp;
@@ -86,6 +86,6 @@ void greedy_insert(t_stack **a, t_stack **b)
         }
         current = current->next;
     }
-    run_cmd(&a, &b);
+    run_cmd(a, b);
     pa(a, b);
 }

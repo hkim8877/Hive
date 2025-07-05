@@ -21,11 +21,11 @@ t_stack **stack_init(t_stack **stack, int value)
     }
     else
     {
-        prev = last(stack);
+        prev = last(*stack);
         prev->next = new_node;
         (*stack)->size += 1;
     }
-    update_idx(stack);
+    update_idx(*stack);
     return (stack);
 }
 
@@ -68,7 +68,7 @@ t_stack *last(t_stack *stack)
         return (NULL);
     while (stack->next)
         stack = stack->next;
-    return (stack)
+    return (stack);
 }
 
 
