@@ -1,54 +1,58 @@
 #include "push_swap.h"
 
-t_stack *stack_create(void)
+t_stack **stack_init(t_stack **stack, int value)
 {
-    t_stack *stack;
+    t_stack *new_node;
+    t_stack *prev;
     
-    stack = malloc(sizeof(t_stack));
-    if (!stack)
-        return NULL;
-    stack->top = NULL;
-    stack->size = 0;
-    return (stack);
-}
-
-void stack_init(t_stack *stack, int value)
-{
-    t_node *new_node;
-    
-    new_node = malloc(sizeof(t_node));
+    if(!stack)
+        return (NULL);
+    new_node = malloc(sizeof(t_stack));
     if (!new_node)
-        return ;
+        return (NULL);
     new_node->value = value;
-    new_node->next = stack->top;
-    stack->top = new_node;
-    stack->size++;
+    new_node->next = NULL;
+    new_node->cost = 0;
+    new_node->index = 0;
+    if (!*stack)
+    {
+        *stack = new_node;
+        new_node->size = 1;
+    }
+    else
+    {
+        prev = last(stack);
+        prev->next = new_node;
+        (*stack)->size += 1;
+    }
+    update_idx(stack);
+    return (stack);
 }
 
 void    free_stack(t_stack **stack)
 {
-    t_node  *current;
-    t_node  *next_node;
-
-    if (!stack || !*stack)
+    t_stack *current;
+    t_stack *next_node;
+  
+    if (!stack)
         return ;
-    current = (*stack)->top;
-    while (current != NULL)
+    current = *stack;
+    while (current)
     {
         next_node = current->next;
         free(current);
         current = next_node;
     }
-    free(*stack);
     *stack = NULL;
 }
 
-int is_sorted(t_stack *stack)
+int is_sorted(t_stack **stack)
 {
-    if (!stack || !stack->top) 
+    if (!stack || !*stack) 
         return (1);
-
-    t_node *current = stack->top;
+    t_stack *current;
+    
+    current = *stack;
     while (current->next)
     {
         if (current->value > current->next->value)
@@ -56,6 +60,15 @@ int is_sorted(t_stack *stack)
         current = current->next;
     }
     return (1);
+}
+
+t_stack *last(t_stack *stack)
+{
+    if (!stack)
+        return (NULL);
+    while (stack->next)
+        stack = stack->next;
+    return (stack)
 }
 
 

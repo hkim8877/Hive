@@ -1,14 +1,14 @@
 #include "push_swap.h"
 
-int find_index(t_stack *stack, int value)
+int find_index(t_stack **stack, int value)
 {
-    if (!stack || !stack->top)
+    if (!stack)
         return (-1);
     int index;
-    t_node *current;
+    t_stack *current;
 
     index = 0;
-    current = stack->top;
+    current = *stack;
     while (current)
     {
         if (current->value == value)
@@ -19,21 +19,21 @@ int find_index(t_stack *stack, int value)
     return (-1);
 }
 
-int find_target_index(t_stack *stack, int value)
+int find_target_index(t_stack **stack, int value)
 {
-    if (!stack || !stack->top)
+    if (!stack)
         return (0);
     int target;
     int min;
     int max;
-    t_node *current;
+    t_stack *current;
 
     target = 0;
     min = stack_min(stack);
     max = stack_max(stack);
     if (value < min || value > max)
         return (find_index(stack, min));
-    current = stack->top;
+    current = *stack;
     while (current->next)
     {
         if (value > current->value && value < current->next->value)
@@ -44,15 +44,15 @@ int find_target_index(t_stack *stack, int value)
     return (0);
 }
 
-int stack_min(t_stack *stack)
+int stack_min(t_stack **stack)
 {
-    if (!stack || !stack->top)
+    if (!stack)
         return (INT_MAX);
     int min;
-    t_node *current;
+    t_stack *current;
 
-    min = stack->top->value;
-    current = stack->top;
+    min = (*stack)->value;
+    current = *stack;
     while (current)
     {
         if (current->value < min)
@@ -62,15 +62,15 @@ int stack_min(t_stack *stack)
     return (min);
 }
 
-int stack_max(t_stack *stack)
+int stack_max(t_stack **stack)
 {
-    if (!stack || !stack->top)
+    if (!stack)
         return INT_MIN;
     int max;
-    t_node *current;
+    t_stack *current;
 
-    max = stack->top->value;
-    current = stack->top;
+    max = (*stack)->value;
+    current = *stack;
     while (current)
     {
         if (current->value > max)
@@ -80,15 +80,15 @@ int stack_max(t_stack *stack)
     return (max);
 }
 
-int stack_size(t_stack *stack)
+int stack_size(t_stack **stack)
 {
     if (!stack)
         return (0);
     int size;
-    t_node *current;
+    t_stack *current;
 
     size = 0;
-    current = stack->top;
+    current = *stack;
     while (current)
     {
         size++;

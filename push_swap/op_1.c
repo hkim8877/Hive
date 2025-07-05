@@ -1,21 +1,21 @@
 #include "push_swap.h"
 
-void sa(t_stack *a)
+void sa(t_stack **a)
 { 
-    if (a->size < 2)
+    if ((*a)->size < 2)
          return;
     swap(a);
     write(1, "sa\n", 3);
 }
-void sb(t_stack *b)
+void sb(t_stack **b)
 { 
-    if (b->size <2)
+    if ((*b)->size <2)
         return;
     swap(b);
     write(1, "sb\n", 3);
 }
 
-void ss(t_stack *a, t_stack *b)
+void ss(t_stack **a, t_stack **b)
 { 
     swap(a);
     swap(b);
@@ -23,14 +23,14 @@ void ss(t_stack *a, t_stack *b)
 }
 void pa(t_stack **a, t_stack **b)
 {
-    if (!(*b)->top) 
+    if (!(*b)) 
         return;
     push(a, b);
     write(1, "pa\n", 3);
 }
 void pb(t_stack **a, t_stack **b)
 {
-    if (!(*a)->top)
+    if (!(*a))
         return;
     push(b, a);
     write(1, "pb\n", 3);

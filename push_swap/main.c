@@ -8,8 +8,8 @@ int main(int argc, char **argv)
     t_stack *b;
     int i;
     
-    a = stack_create();
-    b = stack_create();
+    a = NULL;
+    b = NULL;
     if (!a || !b)
         return (1);
     i = 1;

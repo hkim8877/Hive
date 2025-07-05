@@ -48,7 +48,7 @@ int get_pivot(t_stack *stack, int len)
     free(values);
     return pivot;
 }
-int rotation_cost(t_stack *stack, int index)
+int rotation_cost(t_stack **stack, int index)
 {
     if (!stack || index < 0)
         return (0);
@@ -68,4 +68,15 @@ int abs(int c)
         c *= -1;
     }
     return (c);
+}
+void update_idx(t_stack *stack)
+{
+    int idx;
+
+    idx = 0;
+    while (stack)
+    {
+        stack->index = idx++;
+        stack = stack->next;
+    }
 }
