@@ -44,35 +44,7 @@ int find_target_index_a(t_stack **a, int value)
     }
     return (find_index(a, stack_min(a)));
 }
-int find_target_index_b(t_stack **b, int value)
-{
-     if (!*b)
-        return (0);
-    int target;
-    int b_size;
-    int i;
-    t_stack *current;
-    t_stack *next;
 
-    target = 0;
-    b_size = stack_size(b);
-    current = *b;
-    i = 0;
-    while (i < b_size)
-    {
-        next = current->next;
-        if(!next)
-            next = *b;
-        if (value < current->value && value > next->value)
-            return (target + 1);
-        if (current->value < next->value && (value < current->value || value > next->value))
-            return (target + 1);
-        current = current->next;
-        target++;
-        i++;
-    }
-    return (find_index(b, stack_max(b)));
-}
 int stack_min(t_stack **stack)
 {
     if (!stack || !*stack)
