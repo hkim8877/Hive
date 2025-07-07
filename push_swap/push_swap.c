@@ -37,6 +37,8 @@ void sort_small(t_stack **a)
 void push_swap(t_stack **a, t_stack **b)
 {
     int a_size;
+    int min_idx;
+    int cost;
 
     a_size = stack_size(a);
     if (a_size <= 3)
@@ -49,7 +51,17 @@ void push_swap(t_stack **a, t_stack **b)
         final_push_b(a,b);
     sort_small(a);
     while (*b)
-    {
         push_to_a(a, b);
+    min_idx = find_index(a, stack_min(a));
+    cost = rotation_cost(a, min_idx);
+    while (cost > 0)
+    {
+        ra(a);
+        cost--;
+    }
+    while (cost < 0)
+    {
+        rra(a);
+        cost++;
     }
 }
