@@ -68,5 +68,3 @@ t_stack *last(t_stack *stack)
         stack = stack->next;
     return (stack);
 }
-
-

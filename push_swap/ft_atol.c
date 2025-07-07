@@ -49,4 +49,3 @@ int ft_atol(char *str)
     }
     return ((int)(result * sign));
 }
-
