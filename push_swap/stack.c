@@ -24,7 +24,6 @@ t_stack	**stack_init(t_stack **stack, int value)
 		return (NULL);
 	new_node->value = value;
 	new_node->next = NULL;
-	new_node->cost = 0;
 	new_node->index = 0;
 	if (!*stack)
 	{
