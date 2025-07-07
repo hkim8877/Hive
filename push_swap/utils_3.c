@@ -1,36 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/07 18:07:22 by hyunjkim          #+#    #+#             */
+/*   Updated: 2025/07/07 18:07:23 by hyunjkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int rotation_cost(t_stack **stack, int index)
+int	rotation_cost(t_stack **stack, int index)
 {
-    if (!stack || !*stack || index < 0)
-        return (0);
-    int size;
+	int	size;
 
-    size = stack_size(stack);
-    if (index <= size / 2)
-        return (index); 
-    else
-        return (index - size); 
+	if (!stack || !*stack || index < 0)
+		return (0);
+	size = stack_size(stack);
+	if (index <= size / 2)
+		return (index);
+	else
+		return (index - size);
 }
 
-int ft_abs(int c)
+int	ft_abs(int c)
 {
-    if (c < 0)
-    {
-        c *= -1;
-    }
-    return (c);
+	if (c < 0)
+	{
+		c *= -1;
+	}
+	return (c);
 }
 
-void update_idx(t_stack *stack)
+void	update_idx(t_stack *stack)
 {
-    int idx;
+	int	idx;
 
-    idx = 0;
-    while (stack)
-    {
-        stack->index = idx;
-        stack = stack->next;
-        idx++;
-    }
+	idx = 0;
+	while (stack)
+	{
+		stack->index = idx;
+		stack = stack->next;
+		idx++;
+	}
 }
