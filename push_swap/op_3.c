@@ -6,18 +6,19 @@ void rrr(t_stack **a, t_stack **b)
     reverse_rotate(b);
     write(1, "rrr\n", 4);
 }
+
 void push(t_stack **dest, t_stack **src)
 {
     if (!*src)
         return ;
-    t_stack *push;
+    t_stack *tmp;
     
-    push = *src;
+    tmp = *src;
     *src = (*src)->next;
-    push->next = *dest;
-    *dest = push;
-    update_idx(*dest);
+    tmp->next = *dest;
+    *dest = tmp;
     update_idx(*src);
+    update_idx(*dest);
 }
 
 void swap(t_stack **stack)
@@ -41,26 +42,19 @@ void swap(t_stack **stack)
 
 void rotate(t_stack **stack)
 {
-    if (!*stack || !(*stack)->next) 
+    if (!stack || !*stack || !(*stack)->next) 
         return;
-    t_stack *first;
+    t_stack *tmp;
     t_stack *last;
-    t_stack *current;
-    int index;
     
-    first = *stack;
+    tmp = *stack;
+    *stack = (*stack)->next;
+    tmp->next = NULL;
     last = *stack;
     while (last->next) 
         last = last->next;
-    *stack = first->next;
-    last->next = first;
-    current = *stack;
-    index = 0;
-    while (current)
-    {
-        current->index = index++;
-        current = current->next;
-    }
+    last->next = tmp;
+    update_idx(*stack);
 }
 
 void reverse_rotate(t_stack **stack)

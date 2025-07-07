@@ -34,5 +34,6 @@ void pb(t_stack **a, t_stack **b)
         return;
     push(b, a);
     write(1, "pb\n", 3);
+    // print_stacks_debug("pb", *a, *b);
 }
 

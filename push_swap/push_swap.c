@@ -33,32 +33,35 @@ void sort_small(t_stack **a)
         sa(a);
     else if (stack_size(a) == 3)
         sort_three(a);
+    // else if (stack_size(a) == 4)
+    //     sort_four(a, b);
+    // printf("push_swap: After sort_small, stack A: ");
 }
-void sort_four(t_stack **a, t_stack **b)
-{
-    int min_index;
+// void sort_four(t_stack **a, t_stack **b)
+// {
+//     int min_index;
 
-    min_index = find_index(a, stack_min(a));
-    if (min_index == 0)
-        pb(a, b);
-    else if (min_index == 1)
-    {
-        sa(a);
-        pb(a, b);
-    }
-    else if (min_index == 2)
-    {
-        rra(a);
-        pb(a, b);
-    }
-    else
-    {
-        rra(a);
-        pb(a, b);
-    }
-    sort_three(a);
-    pa(a, b);
-}
+//     min_index = find_index(a, stack_min(a));
+//     if (min_index == 0)
+//         pb(a, b);
+//     else if (min_index == 1)
+//     {
+//         sa(a);
+//         pb(a, b);
+//     }
+//     else if (min_index == 2)
+//     {
+//         rra(a);
+//         pb(a, b);
+//     }
+//     else
+//     {
+//         rra(a);
+//         pb(a, b);
+//     }
+//     sort_three(a);
+//     pa(a, b);
+// }
 
 // void sort_five(t_stack **a, t_stack **b)
 // {
@@ -73,25 +76,25 @@ void push_swap(t_stack **a, t_stack **b)
     if (a_size <= 3)
     {
         sort_small(a);
+        //  print_stacks_debug("After sort_small (<=3 case)", *a, *b);
         return;
     }
-    if (a_size == 4)
-    {
-        sort_four(a,b);
-        return;
-    }
-    if (a_size > 4 && !is_sorted(a))
-    {
-        pb(a, b);
-        pb(a, b);
-    }
-    while (stack_size(a) > 3)
-    {
-        greedy_insert_b(a, b);
-    }
-    sort_three(a);
+    partition(a, b, stack_size(a));
+    // print_stacks_debug("After partition returns", *a, *b); 
+    if (stack_size(a) > 3)
+        final_push_b(a,b);
+    // print_stacks_debug("After final_push_b returns", *a, *b);
+    sort_small(a);
+    // printf("%s\n", "push_swap: After sort_small, stack A: before greedy\n"); // Keep existing
+    // print_stacks_debug("Before greedy_insert_a loop", *a, *b); // <--- ADD THIS
+    // printf("%s\n", "before greedy");
     while (*b)
+    {
         greedy_insert_a(a, b);
+        // print_stacks_debug("After one greedy_insert_a (one element pushed)", *a, *b); 
+    }
+//    printf("%s\n", "final process done\n");
+//     print_stacks_debug("Final state (all operations done)", *a, *b);
 }
 
 
