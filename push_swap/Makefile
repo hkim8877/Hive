@@ -9,7 +9,7 @@ SRCS := push_swap.c \
 	utils_3.c \
 	error.c \
 	ft_atol.c \
-	algorithm.c \
+	b_to_a.c \
 	partition.c \
 	stack.c \
 	main.c
