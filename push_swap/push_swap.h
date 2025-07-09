@@ -77,7 +77,8 @@ int		cleanup_and_error(t_stack **a, t_stack **b);
 int		ft_atol(char *str);
 t_stack	**stack_init(t_stack **stack, int value);
 void	free_stack(t_stack **stack);
-int		clean_exit(t_stack **a, t_stack **b, char **split, int exit_code);
 t_stack	*last(t_stack *stack);
+char	**ft_split(char const *s, char c);
+int		check_errors(char *str);
 
 #endif

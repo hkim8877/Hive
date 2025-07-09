@@ -41,7 +41,7 @@ t_costs	push_cost(t_stack **a, t_stack **b, int value_to_push)
 	return (result);
 }
 
-static void	combined(t_stack **a, t_stack **b, int a_cost, int b_cost)
+static void	combined(t_stack **a, t_stack **b, int *a_cost, int *b_cost)
 {
 	while (a_cost > 0 && b_cost > 0)
 	{
@@ -59,7 +59,7 @@ static void	combined(t_stack **a, t_stack **b, int a_cost, int b_cost)
 
 static void	best_cost(t_stack **a, t_stack **b, int a_cost, int b_cost)
 {
-	combined(a, b, a_cost, b_cost);
+	combined(a, b, &a_cost, &b_cost);
 	while (a_cost > 0)
 	{
 		ra(a);
