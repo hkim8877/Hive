@@ -38,7 +38,7 @@ static void	bubble_sort(int *arr, int len)
 	}
 }
 
-int	get_pivot(t_stack *stack, int len, int pos)
+int	get_pivot(t_stack *stack, int len, int pos, int dec)
 {
 	int		*values;
 	int		pivot;
@@ -46,10 +46,10 @@ int	get_pivot(t_stack *stack, int len, int pos)
 	t_stack	*current;
 
 	if (!stack || len < 1)
-		return (0);
+		return (INT_MIN);
 	values = malloc(sizeof(int) * len);
 	if (!values)
-		return (0);
+		return (INT_MIN);
 	current = stack;
 	i = 0;
 	while (i < len && current)
@@ -58,48 +58,8 @@ int	get_pivot(t_stack *stack, int len, int pos)
 		current = current->next;
 		i++;
 	}
-	bubble_sort(values, len);
-	pivot = values[(len * pos / 3) - 1];
-	free(values);
-	return (pivot);
-}
-
-static void	check_len(int i, int len, int *values)
-{
-	if (i < len)
-	{
-		len = i;
-		if (len < 3)
-		{
-			free(values);
-			return ;
-		}
-	}
-}
-
-int	find_three(t_stack **stack, int len)
-{
-	int		*values;
-	int		i;
-	int		pivot;
-	t_stack	*current;
-
-	if (!stack || !*stack || len < 3)
-		return (0);
-	values = malloc(sizeof(int) * len);
-	if (!values)
-		return (0);
-	current = *stack;
-	i = 0;
-	while (i < len && current)
-	{
-		values[i] = current->value;
-		current = current->next;
-		i++;
-	}
-	check_len(i, len, values);
-	bubble_sort(values, len);
-	pivot = values[len - 3];
+	bubble_sort(values, i);
+	pivot = values[(i * pos / 3) - dec];
 	free(values);
 	return (pivot);
 }

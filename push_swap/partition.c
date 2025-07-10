@@ -12,6 +12,19 @@
 
 #include "push_swap.h"
 
+static void	push_rotate(t_stack **a, t_stack **b, int first, int second)
+{
+	if ((*a)->value < first)
+	{
+		pb(a, b);
+		rb(b);
+	}
+	else if ((*a)->value < second)
+		pb(a, b);
+	else
+		ra(a);
+}
+
 void	partition(t_stack **a, t_stack **b, int len)
 {
 	int	first;
@@ -24,19 +37,13 @@ void	partition(t_stack **a, t_stack **b, int len)
 		return ;
 	}
 	count = len;
-	first = get_pivot(*a, len, 1);
-	second = get_pivot(*a, len, 2);
+	first = get_pivot(*a, len, 1, 1);
+	second = get_pivot(*a, len, 2, 1);
+	if (first == INT_MIN || second == INT_MIN)
+		error();
 	while (count > 0)
 	{
-		if ((*a)->value < first)
-		{
-			pb(a, b);
-			rb(b);
-		}
-		else if ((*a)->value < second)
-			pb(a, b);
-		else
-			ra(a);
+		push_rotate(a, b, first, second);
 		count--;
 	}
 }
@@ -50,10 +57,12 @@ void	final_push_b(t_stack **a, t_stack **b)
 		sort_small(a);
 		return ;
 	}
-	cmp = find_three(a, stack_size(a));
+	cmp = get_pivot(*a, stack_size(a), 3, 3);
+	if (cmp == INT_MIN)
+		error();
 	while (stack_size(a) > 3)
 	{
-		if (cmp > (*a)->value)
+		if ((*a)->value < cmp)
 			pb(a, b);
 		else
 			ra(a);
