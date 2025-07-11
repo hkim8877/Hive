@@ -24,6 +24,19 @@ static char	**parse_argv(int argc, char **argv, int *split)
 	return (argv);
 }
 
+static void	free_split(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 static int	init_stack_from_args(t_stack **a, char **args, int split)
 {
 	int		start;
@@ -37,29 +50,18 @@ static int	init_stack_from_args(t_stack **a, char **args, int split)
 	i = start;
 	while (args[i])
 	{
-		if (!check_errors(args[i]))
+		if (check_errors(args[i]))
 		{
-			value = ft_atol(args[i]);
-			stack_init(a, value);
+			free_stack(a);
+			if (split)
+				free_split(args);
+			return (0);
 		}
-		else
-			free_error(a);
+		value = ft_atol(args[i]);
+		stack_init(a, value);
 		i++;
 	}
 	return (1);
-}
-
-static void	free_split(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
 }
 
 int	main(int argc, char **argv)
