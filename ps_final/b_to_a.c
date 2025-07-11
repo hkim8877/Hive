@@ -49,7 +49,7 @@ static void	combined(t_stack **a, t_stack **b, int *a_cost, int *b_cost)
 		(*a_cost)--;
 		(*b_cost)--;
 	}
-	while (a_cost < 0 && b_cost < 0)
+	while (*a_cost < 0 && *b_cost < 0)
 	{
 		rrr(a, b);
 		(*a_cost)++;

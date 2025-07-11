@@ -22,13 +22,15 @@ static int	ft_isdigit(int c)
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_atol(char *str)
+long long	ft_atol(char *str)
 {
 	int			sign;
 	long long	result;
 
 	sign = 1;
 	result = 0;
+	if (!*str)
+		return (0);
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
@@ -36,15 +38,13 @@ int	ft_atol(char *str)
 		if (*str == '-')
 			sign = -1;
 		str++;
-	}
-	if (!*str)
-		return (0);
+	}	
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	return ((int)(result * sign));
+	return (result * sign);
 }
 
 int	check_errors(char *str)

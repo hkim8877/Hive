@@ -58,6 +58,13 @@ static int	init_stack_from_args(t_stack **a, char **args, int split)
 			return (0);
 		}
 		value = ft_atol(args[i]);
+		if (value > INT_MAX || value < INT_MIN)
+		{
+			free_stack(a);
+			if (split)
+				free_split(args);
+			return (0);
+		}
 		stack_init(a, value);
 		i++;
 	}
