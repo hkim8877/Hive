@@ -59,7 +59,6 @@ int		stack_size(t_stack **stack);
 void	update_idx(t_stack *stack);
 int		ft_abs(int c);
 int		get_pivot(t_stack *stack, int len, int pos, int dec);
-int		find_three(t_stack **stack_head, int len);
 t_costs	push_cost(t_stack **a, t_stack **b, int value_to_push);
 
 //Algorithm
@@ -77,7 +76,6 @@ int		cleanup_and_error(t_stack **a, t_stack **b);
 int		ft_atol(char *str);
 t_stack	**stack_init(t_stack **stack, int value);
 void	free_stack(t_stack **stack);
-int		clean_exit(t_stack **a, t_stack **b, char **split, int exit_code);
 t_stack	*last(t_stack *stack);
 char	**ft_split(char const *s, char c);
 void	free_error(t_stack **a);

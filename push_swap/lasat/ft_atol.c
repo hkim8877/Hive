@@ -42,9 +42,6 @@ int	ft_atol(char *str)
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');
-		if ((sign == 1 && result > INT_MAX)
-			|| (sign == (-1) && (-result) < INT_MIN))
-			error();
 		str++;
 	}
 	return ((int)(result * sign));
