@@ -39,8 +39,6 @@ void	partition(t_stack **a, t_stack **b, int len)
 	count = len;
 	first = get_pivot(*a, len, 1, 1);
 	second = get_pivot(*a, len, 2, 1);
-	if (first == INT_MIN || second == INT_MIN)
-		error();
 	while (count > 0)
 	{
 		push_rotate(a, b, first, second);
@@ -58,8 +56,6 @@ void	final_push_b(t_stack **a, t_stack **b)
 		return ;
 	}
 	cmp = get_pivot(*a, stack_size(a), 3, 3);
-	if (cmp == INT_MIN)
-		error();
 	while (stack_size(a) > 3)
 	{
 		if ((*a)->value < cmp)

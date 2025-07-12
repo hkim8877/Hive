@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: silve <silve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 18:04:53 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/07/07 18:04:56 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:36:27 by silve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	**parse_argv(int argc, char **argv, int *split)
 	return (argv);
 }
 
-static void	free_split(char **args)
+void	free_split(char **args)
 {
 	int	i;
 
@@ -37,12 +37,21 @@ static void	free_split(char **args)
 	free(args);
 }
 
+static int init_error(t_stack **a, char **args, int split)
+{
+    free_stack(a);
+    if (split)
+        free_split(args);
+    error();
+    return (0);
+}
+
 static int	init_stack_from_args(t_stack **a, char **args, int split)
 {
 	int		start;
-	long	value;
+	long long	value;
 	int		i;
-
+	
 	if (split)
 		start = 0;
 	else
@@ -51,20 +60,10 @@ static int	init_stack_from_args(t_stack **a, char **args, int split)
 	while (args[i])
 	{
 		if (check_errors(args[i]))
-		{
-			free_stack(a);
-			if (split)
-				free_split(args);
-			return (0);
-		}
+            init_error(a, args, split);
 		value = ft_atol(args[i]);
 		if (value > INT_MAX || value < INT_MIN)
-		{
-			free_stack(a);
-			if (split)
-				free_split(args);
-			return (0);
-		}
+            init_error(a, args, split);
 		stack_init(a, value);
 		i++;
 	}
@@ -88,7 +87,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_stack_from_args(&a, splited, split))
 		return (cleanup_and_error(&a, &b));
-	if (check_duplicate(a))
+    if (check_duplicate(a))
 		return (cleanup_and_error(&a, &b));
 	if (!is_sorted(&a))
 		push_swap(&a, &b);
