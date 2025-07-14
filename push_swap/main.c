@@ -60,10 +60,10 @@ static int	init_stack_from_args(t_stack **a, char **args, int split)
 	while (args[i])
 	{
 		if (check_errors(args[i]))
-            init_error(a, args, split);
+			init_error(a, args, split);
 		value = ft_atol(args[i]);
 		if (value > INT_MAX || value < INT_MIN)
-            init_error(a, args, split);
+			init_error(a, args, split);
 		stack_init(a, value);
 		i++;
 	}
