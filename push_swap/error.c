@@ -36,12 +36,14 @@ int	check_duplicate(t_stack *a)
 	return (0);
 }
 
-int	cleanup_and_error(t_stack **a, t_stack **b)
+int	cleanup_and_error(t_stack **a, t_stack **b,  char **args, int split)
 {
 	if (a && *a)
 		free_stack(a);
 	if (b && *b)
 		free_stack(b);
+	if (split)
+		free_split(args);
 	write(2, "Error\n", 6);
 	return (1);
 }

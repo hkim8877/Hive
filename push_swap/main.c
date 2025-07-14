@@ -86,9 +86,9 @@ int	main(int argc, char **argv)
 	if (!splited)
 		return (1);
 	if (!init_stack_from_args(&a, splited, split))
-		return (cleanup_and_error(&a, &b));
+		return (cleanup_and_error(&a, &b, splited, split));
     if (check_duplicate(a))
-		return (cleanup_and_error(&a, &b));
+		return (cleanup_and_error(&a, &b, splited, split));
 	if (!is_sorted(&a))
 		push_swap(&a, &b);
 	free_stack(&a);
