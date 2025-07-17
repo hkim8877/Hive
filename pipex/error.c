@@ -32,3 +32,18 @@ void	free_split(char **splited)
 	}
 	free(splited);
 }
+
+void    free_pipex(t_list *pipex)
+{
+    if (pipex == NULL)
+        return ;
+    if (pipex->cmd1)
+        free_split(pipex->cmd1);
+    if (pipex->cmd2)
+        free_split(pipex->cmd2);
+    if (pipex->path)
+        free_split(pipex->path);
+    pipex->cmd1 = NULL; 
+    pipex->cmd2 = NULL;  
+    pipex->path = NULL;   
+}

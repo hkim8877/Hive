@@ -12,13 +12,14 @@
 typedef struct s_list
 {
 	// int		argc;
-    // int     cmd[2];
-	// Pit_t   pid; // check
+   	// char	**argv;
+	int	pid;
 	char	**cmd1;
 	char	**cmd2;
-	char	**argv;
 	char	**path;
 }			t_list;
+
+void process(t_list *pipex, char **argv);
 
 // Parsing - commands
 char **cmd_array(int argc, char **argv);
@@ -31,10 +32,11 @@ void    *ft_memcpy(void *dest, const void *src, size_t n);
 size_t  ft_strlen(const char *s);
 size_t  ft_strlcat(char *dst, const char *src, size_t size);
 
-// Error
+// Error and free memory
 void ft_error(char *error);
 void    ft_putstr_fd(char *s, int fd);
 void ft_perror(char *error);
 void	free_split(char **splited);
+void    free_pipex(t_list *pipex);
 
 #endif

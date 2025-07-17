@@ -1,46 +1,75 @@
 #include "pipex.h"
 
+void process(t_list *pipex, char **argv)
+{
+   int infile;
+   int outfile;
+   int fd[2];
 
-// static void child_1(t_args args)
-// {
-//     int infile;
+   if (pipe(fd) == -1)
+     ft_perror("pipe");
+   pipex->pid = fork();
+   if (pipex->pid == -1)
+      ft_perror("fork");
+   else if (pipex->pid == 0)
+   {
+      infile = open(argv[1], O_RDONLY);
+      if (infile == -1)
+         ft_perror("infile error");
+      dup2(infile, STDIN_FILENO);
+      close(infile);
+      dup2(fd[1], STDOUT_FILENO);
+      close(fd[0]);
+      close(fd[1]);
+      char *cmd1_path = get_cmd_path(pipex->path, pipex->cmd1);
+      execve(cmd1_path, pipex->cmd1, NULL);
+   }
+   else
+   {
+      dup2(fd[0], STDIN_FILENO);
+      close(fd[1]);
+      close(fd[0]);
+      outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+      if (outfile == -1)
+         ft_perror("outfile error");
+      dup2(outfile, STDOUT_FILENO);
+      close(outfile);
+      char *cmd2_path = get_cmd_path(pipex->path, pipex->cmd2);
+      execve(cmd2_path, pipex->cmd2, NULL);
+   }
+   close(fd[0]);
+   close(fd[1]);
+   waitpid(pipex->pid, NULL, 0);
+}
 
-//     infile = open(av[1], O_RDONLY);
-//     if (infile == -1)
-//         ft_perror("infile error");
-    
-// }
-
-// static void child_2(t_args args)
-
-
-
-/*
-static void init_args(int argc, char **argv, char** envp)
-*/
+static int init_pipex(t_list *pipex, char **argv, char **envp)
+{
+   pipex->pid = 0;
+   pipex->cmd1 = cmd_array(3, argv);
+   if (!pipex->cmd1)
+      return (1);
+   pipex->cmd2 = cmd_array(4, argv);
+   if (!pipex->cmd2)
+      return (1);
+   pipex->path = find_path(envp);
+   if (!pipex->path)
+      return (1);
+   return (0);
+   //pipex.argc = argc;
+   //pipex.argv = argv;
+}
 
 int main(int argc, char **argv, char **envp)
 {
-   int pipes[2];
    t_list pipex;
 
    if (argc != 5)
       ft_error("arguments error\n");
-   if (pipe(pipes) == -1)
-      ft_perror("pipe");
-   //pipex.argc = argc;
-   //pipex.argv = argv;
-   pipex.cmd1 = cmd_array(3, argv);
-   pipex.cmd2 = cmd_array(4, argv);
-   pipex.path = find_path(envp);
-   char *cmd1_path =  get_cmd_path(pipex.path, pipex.cmd1);
-   char *cmd2_path =  get_cmd_path(pipex.path, pipex.cmd2);
-   printf("%s\n", cmd1_path);
-   printf("%s\n", cmd2_path);
-   free(pipex.cmd1);
-   free(pipex.cmd2);
-   free(pipex.path);
-    return (0);
+   if (init_pipex(&pipex, argv, envp))
+      ft_error("Initialization error\n");
+   process(&pipex, argv);
+   free_pipex(&pipex);
+   return (0);
 }
 
 
