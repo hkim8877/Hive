@@ -1,6 +1,10 @@
 NAME := pipex
 
-SRCS := \
+SRCS := command.c \
+	ft_split.c\
+	error.c \
+	utils_libft.c \
+	process.c \
 	main.c
 
 OBJS := $(SRCS:%.c=%.o)

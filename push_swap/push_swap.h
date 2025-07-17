@@ -81,6 +81,5 @@ char	**ft_split(char const *s, char c);
 void	free_error(t_stack **a);
 int		check_errors(char *str);
 void	free_split(char **args);
-int	check_limits(t_stack *a);
 
 #endif
