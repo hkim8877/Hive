@@ -34,7 +34,36 @@ char **find_path(char **envp)
     path = ft_split(one_line, ':');
     if (!path)
         return (NULL);
+    free(one_line);
     return (path);
+}
+
+static void    *ft_memset(void *s, int c, size_t n)
+{
+    unsigned char *temp;
+    size_t i;
+
+    temp = (unsigned char*) s;
+    i = 0;
+    while (i < n)
+    {
+        temp[i] = (unsigned char)c;
+        i++;
+    }
+    return (s);
+}
+
+static void    *ft_calloc(size_t nmemb, size_t size)
+{
+       void  *memory;
+       size_t total;
+
+       total = nmemb * size;
+       memory = malloc(total);
+       if (!memory)
+              return (NULL);       
+       ft_memset(memory, 0, total);
+       return (memory);
 }
 
 char *get_cmd_path(char **path, char **cmd_array)
@@ -51,7 +80,7 @@ char *get_cmd_path(char **path, char **cmd_array)
         cmd = cmd_array[0];
         path_len = ft_strlen(path[i]);
         total_len = path_len + ft_strlen(cmd) + 2;
-        full_path = malloc(total_len);
+        full_path = ft_calloc(total_len, sizeof(char));
         if (!full_path)
             return (NULL);
         ft_memcpy(full_path, path[i], path_len);
