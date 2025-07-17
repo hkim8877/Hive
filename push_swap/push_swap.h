@@ -74,8 +74,8 @@ void	error(void);
 int		check_duplicate(t_stack *a);
 int		cleanup_and_error(t_stack **a, t_stack **b,  char **args, int split)
 long long		ft_atol(char *str);
-t_stack	**stack_init(t_stack **stack, int value);
 void	free_stack(t_stack **stack);
+t_stack	**stack_init(t_stack **stack, int value);
 t_stack	*last(t_stack *stack);
 char	**ft_split(char const *s, char c);
 void	free_error(t_stack **a);
