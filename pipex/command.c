@@ -64,6 +64,7 @@ static void    *ft_calloc(size_t nmemb, size_t size)
               return (NULL);       
        ft_memset(memory, 0, total);
        return (memory);
+       
 }
 
 char *get_cmd_path(char **path, char **cmd_array)
@@ -74,10 +75,12 @@ char *get_cmd_path(char **path, char **cmd_array)
     size_t path_len;
     size_t total_len;
 
+    if (!path || !cmd_array || !cmd_array[0])
+        return (NULL);
     i = 0;
+    cmd = cmd_array[0];
     while (path[i])
     {
-        cmd = cmd_array[0];
         path_len = ft_strlen(path[i]);
         total_len = path_len + ft_strlen(cmd) + 2;
         full_path = ft_calloc(total_len, sizeof(char));
@@ -88,12 +91,6 @@ char *get_cmd_path(char **path, char **cmd_array)
         ft_strlcat(full_path, cmd, total_len);
         if (access(full_path, X_OK) == 0)
             return (full_path);
-        // else
-        // {
-        //     free(full_path);
-        //     full_path
-        //     ft_perror("access failed");
-        // }
         free(full_path);
         i++;
     }

@@ -1,16 +1,10 @@
 #include "pipex.h"
 
-void ft_error(char *error)
-{
-    ft_putstr_fd(error, 2);
-    exit(1);
-}
-
-void ft_perror(char *error)
+void ft_perror(char *error, t_list *pipex, int exit_code)
 {
     perror(error);
-    //free 
-    exit(EXIT_FAILURE);
+    free_pipex(pipex);
+    exit(exit_code);
 }
 
 void    ft_putstr_fd(char *s, int fd)
@@ -46,4 +40,10 @@ void    free_pipex(t_list *pipex)
     pipex->cmd1 = NULL; 
     pipex->cmd2 = NULL;  
     pipex->path = NULL;   
+}
+
+void cleanup(t_list *pipex, int exit_code)
+{
+   free_pipex(pipex);
+   exit(exit_code);
 }
