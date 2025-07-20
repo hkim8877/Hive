@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 15:51:19 by hyunjkim          #+#    #+#             */
+/*   Updated: 2025/07/20 15:51:21 by hyunjkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-void ft_perror(char *error, t_list *pipex, int exit_code)
+void	ft_perror(char *error, t_list *pipex, int exit_code)
 {
-    perror(error);
-    free_pipex(pipex);
-    exit(exit_code);
+	perror(error);
+	free_pipex(pipex);
+	exit(exit_code);
 }
 
-void    ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s || fd < 0)
 		return ;
@@ -27,23 +39,23 @@ void	free_split(char **splited)
 	free(splited);
 }
 
-void    free_pipex(t_list *pipex)
+void	free_pipex(t_list *pipex)
 {
-    if (pipex == NULL)
-        return ;
-    if (pipex->cmd1)
-        free_split(pipex->cmd1);
-    if (pipex->cmd2)
-        free_split(pipex->cmd2);
-    if (pipex->path)
-        free_split(pipex->path);
-    pipex->cmd1 = NULL; 
-    pipex->cmd2 = NULL;  
-    pipex->path = NULL;   
+	if (pipex == NULL)
+		return ;
+	if (pipex->cmd1)
+		free_split(pipex->cmd1);
+	if (pipex->cmd2)
+		free_split(pipex->cmd2);
+	if (pipex->path)
+		free_split(pipex->path);
+	pipex->cmd1 = NULL;
+	pipex->cmd2 = NULL;
+	pipex->path = NULL;
 }
 
-void cleanup(t_list *pipex, int exit_code)
+void	cleanup(t_list *pipex, int exit_code)
 {
-   free_pipex(pipex);
-   exit(exit_code);
+	free_pipex(pipex);
+	exit(exit_code);
 }
