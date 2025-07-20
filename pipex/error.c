@@ -53,9 +53,3 @@ void	free_pipex(t_list *pipex)
 	pipex->cmd2 = NULL;
 	pipex->path = NULL;
 }
-
-void	cleanup(t_list *pipex, int exit_code)
-{
-	free_pipex(pipex);
-	exit(exit_code);
-}
