@@ -17,6 +17,7 @@ static void	ft_error(char *error)
 	ft_putstr_fd(error, 2);
 	exit(1);
 }
+
 void	cleanup(t_list *pipex, int exit_code)
 {
 	free_pipex(pipex);
