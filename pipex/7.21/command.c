@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <ctype.h>
 
 char	**cmd_array(int argc, char **argv)
 {
@@ -77,55 +76,6 @@ static void	*ft_calloc(size_t nmemb, size_t size)
 	ft_memset(memory, 0, total);
 	return (memory);
 }
-// char **cmd_array(int argc, char **argv)
-// {
-//     char **cmd;
-//     char *cmd_str; // The raw string like " " or "ls -l"
-
-// 	cmd_str = argv[argc - 1];
-//     if (argc < 1 || !argv || !cmd_str)
-//         return (NULL);
-
-//     // Check if the command string is effectively empty (contains only whitespace or is empty)
-//     int is_effectively_empty = 1;
-//     for (size_t i = 0; cmd_str[i] != '\0'; i++) {
-//         if (!isspace((unsigned char)cmd_str[i])) {
-//             is_effectively_empty = 0;
-//             break;
-//         }
-//     }
-
-//     if (is_effectively_empty) {
-//         // For an effectively empty command, we explicitly create an array
-//         // where the first element is NULL. This signals to get_cmd_path
-//         // (and then exec_and_error, or your current child_process check)
-//         // that it's an empty command.
-//         cmd = ft_calloc(2, sizeof(char*)); // One for NULL, one for the array terminator
-//         if (!cmd)
-//             return (NULL); // Memory allocation failure
-//         cmd[0] = NULL; // Indicate empty command
-//         cmd[1] = NULL; // Null-terminate the array
-//         return (cmd);
-//     }
-
-//     // If not effectively empty, proceed with ft_split
-//     cmd = ft_split(cmd_str, ' ');
-
-//     // This 'if (!cmd)' handles malloc failures from ft_split
-//     // OR if ft_split returns NULL for a string like " " (depending on its impl.)
-//     if (!cmd)
-//         return (NULL);
-
-//     // Additional check: if ft_split returns an array but the first element
-//     // is an empty string (""), this also signifies an empty command.
-//     // Convert it to NULL so the check `if (!pipex->cmd1[0])` works.
-//     if (cmd[0] && cmd[0][0] == '\0') {
-//         free(cmd[0]); // Free the empty string allocated by ft_split
-//         cmd[0] = NULL; // Set it to NULL
-//     }
-
-//     return (cmd);
-// }
 
 char	*get_cmd_path(char **path, char **cmd_array)
 {
