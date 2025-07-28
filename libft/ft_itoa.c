@@ -53,26 +53,3 @@ char	*ft_itoa(int n)
 	}
 	return (result);
 }
-/*
-#include <stdio.h>
-int main()
-{
-    int a = 12345;
-    long b = 123456789123;
-    long c = -1234567890123;
-
-    printf("%s\n", ft_itoa(a));
-    printf("%s\n", ft_itoa(b));
-    printf("%s\n", ft_itoa(c));
-}
-    */
-/*
-DESCRIPTION
-    Allocate (with malloc(3)) and returns a string representing n.
-    Negative numbers must be handled.
-PARAMETERS
-    n: int to convert
-RETURN VALUES
-    ft_itoa() returns the string representing n; 
-NULL if the memory allocation failed.
-*/

@@ -37,21 +37,21 @@ void	free_split(char **args)
 	free(args);
 }
 
-static int init_error(t_stack **a, char **args, int split)
+static int	init_error(t_stack **a, char **args, int split)
 {
-    free_stack(a);
-    if (split)
-        free_split(args);
-    error();
-    return (0);
+	free_stack(a);
+	if (split)
+		free_split(args);
+	error();
+	return (0);
 }
 
 static int	init_stack_from_args(t_stack **a, char **args, int split)
 {
-	int		start;
+	int			start;
 	long long	value;
-	int		i;
-	
+	int			i;
+
 	if (split)
 		start = 0;
 	else
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!init_stack_from_args(&a, splited, split))
 		return (cleanup_and_error(&a, &b, splited, split));
-    if (check_duplicate(a))
+	if (check_duplicate(a))
 		return (cleanup_and_error(&a, &b, splited, split));
 	if (!is_sorted(&a))
 		push_swap(&a, &b);

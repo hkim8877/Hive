@@ -46,21 +46,3 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	get_nbr(nbr, fd);
 }
-/*
-#include <stdio.h>
-int main()
-{
-    int t1 = 2147483647;
-    int t2 = -2147483648;
-    int t3 = 0;
-    int t4 = 2147488;
-
-    ft_putnbr_fd(t1, 1);
-    printf("\n");
-    ft_putnbr_fd(t2, 1);
-    printf("\n");
-    ft_putnbr_fd(t3, 1);
-    printf("\n");
-    ft_putnbr_fd(t4, 1);
-}
-    */

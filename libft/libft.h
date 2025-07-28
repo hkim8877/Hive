@@ -6,7 +6,7 @@
 /*   By: hyunjkim <hyunjkim@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:24:34 by hyunjkim          #+#    #+#             */
-/*   Updated: 2025/06/12 17:22:07 by hyunjkim         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:35:46 by hyunjkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h> 
-
-typedef struct s_list
-{
-	void		*content;
-	struct s_list	*next;
-}	t_list;
 
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

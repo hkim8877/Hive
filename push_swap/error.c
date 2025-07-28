@@ -36,7 +36,7 @@ int	check_duplicate(t_stack *a)
 	return (0);
 }
 
-int	cleanup_and_error(t_stack **a, t_stack **b,  char **args, int split)
+int	cleanup_and_error(t_stack **a, t_stack **b, char **args, int split)
 {
 	if (a && *a)
 		free_stack(a);

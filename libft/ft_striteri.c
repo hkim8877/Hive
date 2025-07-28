@@ -23,12 +23,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
-/*
-DESCRIPTION
-    Apply the function 'f' to each characters of the string 's', passing its 
-    index as a first parameter.
-    Each character is transmitted by address to 'f' so it can be modified 
-    if necessary.
-    The function f directly modifies the value of the character in the 
-    original string.
-*/

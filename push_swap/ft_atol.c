@@ -38,7 +38,7 @@ long long	ft_atol(char *str)
 		if (*str == '-')
 			sign = -1;
 		str++;
-	}	
+	}
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');

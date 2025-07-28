@@ -31,20 +31,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	dst[i] = '\0';
 	return (s);
 }
-/*
-#include <stdio.h>
-#include <bsd/string.h> 
-
-int main()
-{
-    char dest[10] = "a";
-    const char *src = "hello";
-
-    size_t re = ft_strlcpy(dest, src, 0);
-
-    printf("%zu\n", re);
-    printf("%s\n", dest);
-
-    return 0;
-}
-*/
