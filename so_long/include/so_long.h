@@ -30,22 +30,22 @@ typedef struct s_data
     int moves;
 }   t_data;
 
-// read_map.c
+// read_map.c & check_map.c & path_utils.c
 void check_line(t_data *map, char *line);
 void read_map(t_data *map, int fd);
-
-// check_map.c
 void is_map_valid(t_data *map, char *file);
 void init_map(t_data *map, int fd);
-void chr_check(t_data *map);
-void wall_check(t_data *map);
+void check_chr(t_data *map);
+void check_wall(t_data *map);
+void check_path(t_data *map, int fd);
 
-// path_utils.c
 
-// errors.c
+// init_data.c & errors.c
+void init_data(t_data *map);
 void check_file(char *file);
 void ft_error(const char *message);
 void map_error(int fd, int code);
+void free_map(t_data *map);
 
 
 #endif 

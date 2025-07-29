@@ -1,25 +1,5 @@
 #include "so_long.h"
 
-void check_file(char *file)
-{
-    char *ext;
-    size_t file_len;
-    size_t ext_len;
-
-    if (file == NULL)
-        return (0);
-    ext = ".ber";
-    file_len = ft_strlen(file);
-    ext_len = ft_strlen(ext);
-    if (file_len < ext_len)
-        return (0);
-    if (ft_strncmp(file + (file_len - ext_len), ext, ext_len) == 0)
-	{
-		return (1);
-	}
-	return (0);
-}
-
 void ft_error(const char *message)
 {
     write(2, message, ft_strlen(message));
@@ -37,4 +17,39 @@ void map_error(int fd, int code)
         ft_error("Error: memory allocation failed!\n");
     if (code == 4)
         ft_error("Error: get_next_line failed while filing map!\n");
+    if (code == 5)
+    {
+        free_map(map);
+        ft_error("Error: map is not surrounded by walls!\n");
+    }
+    if (code == 6)
+        ft_error("Error: invliad path!\n");
+}
+
+void free_map(t_data *map)
+{
+    int i;
+
+    i = 0;
+    while (i < map->height)
+    {
+        free(map->map[i]);
+        i++;
+    }
+    free(map->map);
+}
+
+void free_tmp(char **tmp, int height)
+{
+    int i;
+
+    if (!tmp)
+        return;
+    i = 0;
+    while (i < height)
+    {
+        free(tmp[i]);
+        i++;
+    }
+    free(tmp);
 }

@@ -7,11 +7,21 @@ void is_map_valid(t_data *map, char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1);
         ft_error("Error: file open error!\n");
-    chr_check(map);
+    check_chr(map);
     map->collectible = map->jelly;
     init_map(map, fd);
-    wall_check(map);
-    path_check(map);
+    check_wall(map, fd);
+    check_path(map);
+}
+
+void check_chr(t_data *map)
+{
+    if (map->jelly == 0)
+        ft_error("Error: missing a collectible!\n");
+    else if (map->player != 1)
+        ft_error("Error: player is not one!\n");
+    else if (map->exit != 1)
+        ft_error("Error: exit is not one!\n");
 }
 
 void init_map(t_data *map, int fd);
@@ -37,22 +47,26 @@ void init_map(t_data *map, int fd);
     close(fd);
 }
 
-void chr_check(t_data *map)
+void check_wall(t_data *map, int fd)
 {
-    if (map->jelly == 0)
-        ft_error("Error: missing a collectible!\n");
-    else if (map->player != 1)
-        ft_error("Error: player is not one!\n");
-    else if (map->exit != 1)
-        ft_error("Error: exit is not one!\n");
-}
+    int i;
 
-void wall_check(t_data *map)
-{
-
-}
-
-void path_check(t_data *map)
-{
-    
+    i = 0;
+    while (i < map->width)
+    {
+        if (map->map[0][i] != '1')
+            map_error(fd, 5);
+        if (map->map[map->height - 1][i] != '1')
+            map_error(fd, 5);
+        i++;
+    }
+    i = 0;
+    while (i < map->height)
+    {
+        if (map->map[i][0] != '1')
+            map_error(fd, 5);
+        if (map->map[i][width - 1] != '1')
+            map_error(fd, 5);
+        i++;
+    }
 }
