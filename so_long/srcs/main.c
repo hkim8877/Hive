@@ -16,7 +16,9 @@ int main(int argc, char **argv)
     read_map(&map, fd);
     close(fd);
     is_map_valid(&map, argv[1]);
-    draw_map(&map);
-    
+    init_mlx(&map);
+    mlx_hook(map.win_ptr, KEYPRESS, KEYPRESS_MASK, &key_hook, &map);
+    mlx_hook(map.win_ptr, EXIT, EXIT_MASK, &end_game, &map);
+    mlx_loop(map.mlx_ptr);
     return(0);    
 }

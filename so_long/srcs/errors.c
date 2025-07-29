@@ -6,7 +6,7 @@ void ft_error(const char *message)
     exit(EXIT_FAILURE);
 }
 
-void map_error(int fd, int code)
+void map_error(int fd, int code, t_data *map)
 {
     close(fd);
     if (code == 1)
@@ -52,4 +52,17 @@ void free_tmp(char **tmp, int height)
         i++;
     }
     free(tmp);
+}
+
+void free_all(t_data *map)
+{
+    mlx_destroy_image(map->mlx_ptr, map->player_img);
+    mlx_destroy_image(map->mlx_ptr, map->wall_img);
+    mlx_destroy_image(map->mlx_ptr, map->exit_img);
+    mlx_destroy_image(map->mlx_ptr, map->collect_img);
+    mlx_destroy_image(map->mlx_ptr, map->back_img);
+    mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+    mlx_destroy_display(map->mlx_ptr);
+    free_map(map);
+    free(map->mlx_ptr);
 }

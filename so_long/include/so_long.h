@@ -9,11 +9,29 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define KEYPRESS 2
+# define KEYPRESS_MASK 1L<<0
+# define EXIT 17
+# define EXIT_MASK 1L<<17
+
+// # define KEY_W 13
+// # define KEY_S 1
+// # define KEY_A 0
+// # define KEY_D 2
+// # define KEY_ESC 53
+
+// Linux KeyCodes
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_ESC 65307
+
 typedef struct s_data
 {
     void *mlx_ptr;
     void *win_ptr;
-    void *player_img
+    void *player_img;
     void *wall_img;
     void *exit_img;
     void *collect_img;
@@ -23,29 +41,41 @@ typedef struct s_data
     int height;
     int x;
     int y;
-    int collectible;
     int jelly;
     int exit;
     int player;
     int moves;
 }   t_data;
 
-// read_map.c & check_map.c & path_utils.c
+// read_map.c && check_map.c && path_utils.c
 void check_line(t_data *map, char *line);
 void read_map(t_data *map, int fd);
 void is_map_valid(t_data *map, char *file);
 void init_map(t_data *map, int fd);
 void check_chr(t_data *map);
-void check_wall(t_data *map);
+void check_wall(t_data *map, int fd);
 void check_path(t_data *map, int fd);
 
-
-// init_data.c & errors.c
+// init_data.c && errors.c
 void init_data(t_data *map);
-void check_file(char *file);
+int check_file(char *file);
 void ft_error(const char *message);
-void map_error(int fd, int code);
+void map_error(int fd, int code, t_data *map);
 void free_map(t_data *map);
+void free_tmp(char **tmp, int height);
+void free_all(t_data *map);
 
+//gmae_images.c && game_keys.c && keys_utils.c
+void init_mlx(t_data *map);
+void get_images(t_data *map);
+void render_map(t_data *map);
+int key_hook(int keycode, t_data *map);
+void move_up(t_data *map, int x, int y);
+void move_down(t_data *map, int x, int y);
+void move_left(t_data *map, int x, int y);
+void move_right(t_data *map, int x, int y);
+void find_player(t_data *map);
+int find_jelly(t_data *map);
+int end_game(t_data *map);
 
-#endif 
+#endif

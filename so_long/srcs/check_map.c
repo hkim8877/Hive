@@ -5,13 +5,12 @@ void is_map_valid(t_data *map, char *file)
     int fd;
 
     fd = open(file, O_RDONLY);
-    if (fd == -1);
+    if (fd == -1)
         ft_error("Error: file open error!\n");
     check_chr(map);
-    map->collectible = map->jelly;
     init_map(map, fd);
     check_wall(map, fd);
-    check_path(map);
+    check_path(map, fd);
 }
 
 void check_chr(t_data *map)
@@ -24,23 +23,23 @@ void check_chr(t_data *map)
         ft_error("Error: exit is not one!\n");
 }
 
-void init_map(t_data *map, int fd);
+void init_map(t_data *map, int fd)
 {
     int i;
 
     map->map = ft_calloc(sizeof(char *), map->height + 1);
     if (!map->map)
-        map_error(fd, 3);
+        map_error(fd, 3, map);
     i = 0;
     while (i < map->height)
     {
-        map->map[i] = get_next_line(fd)
+        map->map[i] = get_next_line(fd);
         if (!map->map[i])
         {
             while (--i >= 0)
                 free(map->map[i]);
             free(map->map);
-            map_error(fd, 4);
+            map_error(fd, 4, map);
         }
         i++;
     }
@@ -55,18 +54,18 @@ void check_wall(t_data *map, int fd)
     while (i < map->width)
     {
         if (map->map[0][i] != '1')
-            map_error(fd, 5);
+            map_error(fd, 5, map);
         if (map->map[map->height - 1][i] != '1')
-            map_error(fd, 5);
+            map_error(fd, 5, map);
         i++;
     }
     i = 0;
     while (i < map->height)
     {
         if (map->map[i][0] != '1')
-            map_error(fd, 5);
-        if (map->map[i][width - 1] != '1')
-            map_error(fd, 5);
+            map_error(fd, 5, map);
+        if (map->map[i][map->width - 1] != '1')
+            map_error(fd, 5, map);
         i++;
     }
 }

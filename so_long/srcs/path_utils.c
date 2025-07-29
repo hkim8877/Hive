@@ -13,14 +13,14 @@ void check_path(t_data *map, int fd)
     if (!tmp)
     {
         free_map(map);
-        ft_error(fd, 3);
+        map_error(fd, 3, map);
     }
     filling(tmp, map);
     if (!is_path_valid(tmp, map))
     {
         free_map(map);
         free_tmp(tmp, map->height);
-        ft_error(fd, 6);
+        map_error(fd, 6, map);
     }
     free_tmp(tmp, map->height);
 }

@@ -14,15 +14,13 @@ void init_data(t_data *map)
     map->height = 0;
     map->x = 0;
     map->y = 0;
-    map->collectible = 0;
     map->jelly = 0;
     map->exit = 0;
     map->player = 0;
-    map->wall = 0;
     map->moves = 0;
 }
 
-void check_file(char *file)
+int check_file(char *file)
 {
     char *ext;
     size_t file_len;
