@@ -1,35 +1,51 @@
-#include "./mlx_linux/mlx.h"
+#include "so_long.h"
 
-int main(void)
+static void init_data(t_data *map);
+
+int main(int argc, char **argv)
 {
-    void *mlx;
-    void *mlx_win;
+    t_data map;
+    int fd;
+    
+    if (argc != 2)
+        exit(1);
+    if (!check_file(argv[1]))
+        ft_error("Error: file format error!\n");
+    fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        ft_error("Error: file open error!\n");
+    init_data(&map);
+    read_map(&map, fd);
+    close(fd);
+    is_map_valid(&map, argv[1]);
+    draw_map(&map);
+    
+    return(0);    
+}
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello World!");
-    mlx_loop(mlx);
+static void init_data(t_data *map)
+{
+    map->mlx_ptr = NULL;
+    map->win_ptr = NULL;
+    map->player_img = NULL;
+    map->wall_img = NULL;
+    map->exit_img = NULL;
+    map->collect_img = NULL;
+    map->back_img = NULL;
+    map->map = NULL;
+    map->width = 0;
+    map->height = 0;
+    map->x = 0;
+    map->y = 0;
+    map->collectible = 0;
+    map->jelly = 0;
+    map->exit = 0;
+    map->player = 0;
+    map->wall = 0;
+    map->moves = 0;
 }
 
 
 
 
 
-//gcc main.c -Lmlx_linux -lmlx_Linux -lXext -lX11 -lm -lz
-/*
-%.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
-# Contains the X11 and MLX header files
-INCLUDES = -I/opt/X11/include -Imlx
-
-.c.o:
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
-    
-# Link X11 and MLX
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
-*/
