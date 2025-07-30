@@ -12,36 +12,42 @@
 
 #include "so_long.h"
 
+static void make_map(t_data *map, char *line, int fd, int first_line)
+{
+	int check_wid;
+
+	check_line(map, line);
+	check_wid = ft_strlen(line);
+	if (check_wid > 0 && line[check_wid - 1] == '\n')
+		check_wid--;
+	if (first_line)
+		map->width = check_wid;
+	else
+	{
+		if (check_wid != map->width)
+		{
+			free(line);
+			map_error(fd, 2, map);
+		}
+	}
+	map->height++;
+	free(line);
+}
+
 void	read_map(t_data *map, int fd)
 {
 	char	*line;
-	int		wid_check;
 
 	line = get_next_line(fd);
 	if (!line)
 		map_error(fd, 1, map);
-	map->width = ft_strlen(line);
-	if (map->width > 0 && line[map->width - 1] == '\n')
-		map->width--;
-	map->height = 1;
-	check_line(map, line);
-	free(line);
+	make_map(map, line, fd, 1);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		check_line(map, line);
-		wid_check = ft_strlen(line);
-		if (wid_check > 0 && line[wid_check - 1] == '\n')
-			wid_check--;
-		if (wid_check != map->width)
-		{
-			free(line);
-			map_error(fd, 2, map);
-		}
-		map->height++;
-		free(line);
+		make_map(map, line, fd, 0);		
 	}
 }
 
