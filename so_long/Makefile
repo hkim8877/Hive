@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR := srcs
 LIBFT_DIR = ./libft
-MLX_DIR = ./mlx
+MLX_DIR = ../mlx
 
 LIBFT_A = $(LIBFT_DIR)/libft.a
 MLX_LIB := $(MLX_DIR)/libmlx.a
@@ -28,7 +28,18 @@ else ifeq ($(OS), Linux)
 	           -lXext -lX11 -lm -lz
 endif
 
-SRCS := $(wildcard $(SRC_DIR)/*.c)	
+SRCS := $(SRC_DIR)/main.c \
+	$(SRC_DIR)/check_map.c \
+	$(SRC_DIR)/errors.c \
+	$(SRC_DIR)/game_images.c \
+	$(SRC_DIR)/game_keys.c \
+	$(SRC_DIR)/init_data.c \
+	$(SRC_DIR)/keys_utils.c \
+	$(SRC_DIR)/path_utils.c \
+	$(SRC_DIR)/read_map.c \
+	$(SRC_DIR)/handle_edge.c
+
+	
 
 OBJS := $(SRCS:%.c=%.o)
 
