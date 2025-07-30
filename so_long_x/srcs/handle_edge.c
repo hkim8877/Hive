@@ -12,19 +12,41 @@
 
 #include "so_long.h"
 
-static void	flood_fill_e(char **tmp, t_data *map, int x, int y)
+static char	**map_copy(t_data *map)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	tmp = ft_calloc(sizeof(char *), map->height + 1);
+	if (!tmp)
+		return (NULL);
+	while (i < map->height)
+	{
+		tmp[i] = ft_strdup(map->map[i]);
+		if (!tmp[i])
+		{
+			free_tmp(tmp, map->height);
+			return (NULL);
+		}
+		i++;
+	}
+	return (tmp);
+}
+
+static void	flood_fill_ext(char **tmp, t_data *map, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= map->width || y >= map->height
 		|| tmp[y][x] == '1' || tmp[y][x] == 'E')
 		return ;
 	tmp[y][x] = '1';
-	flood_fill_e(tmp, map, x + 1, y);
-	flood_fill_e(tmp, map, x - 1, y);
-	flood_fill_e(tmp, map, x, y + 1);
-	flood_fill_e(tmp, map, x, y - 1);
+	flood_fill_ext(tmp, map, x + 1, y);
+	flood_fill_ext(tmp, map, x - 1, y);
+	flood_fill_ext(tmp, map, x, y + 1);
+	flood_fill_ext(tmp, map, x, y - 1);
 }
 
-static void	filling_e(char **tmp, t_data *map)
+static void	filling_for_edge(char **tmp, t_data *map)
 {
 	int	y;
 	int	x;
@@ -35,15 +57,35 @@ static void	filling_e(char **tmp, t_data *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if (map->map[y][x] == 'C')
+			if (map->map[y][x] == 'P')
 			{
-				flood_fill_e(tmp, map, x, y);
+				flood_fill_ext(tmp, map, x, y);
 				return ;
 			}
 			x++;
 		}
 		y++;
 	}
+}
+
+static int	is_path_valid(char **tmp, t_data *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (tmp[y][x] == 'C')
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
 
 void	check_path_edge(t_data *map, int fd)
@@ -56,7 +98,7 @@ void	check_path_edge(t_data *map, int fd)
 		free_map(map);
 		map_error(fd, 3, map);
 	}
-	filling_e(tmp, map);
+	filling_for_edge(tmp, map);
 	if (!is_path_valid(tmp, map))
 	{
 		free_map(map);
@@ -64,41 +106,4 @@ void	check_path_edge(t_data *map, int fd)
 		map_error(fd, 6, map);
 	}
 	free_tmp(tmp, map->height);
-}
-
-static int	check_if_exit(t_data *map, int y, int x)
-{
-	if (map->map[y + 1][x] == 'E')
-		return (1);
-	if (map->map[y - 1][x] == 'E')
-		return (2);
-	if (map->map[y][x + 1] == 'E')
-		return (3);
-	if (map->map[y][x - 1] == 'E')
-		return (4);
-	return (0);
-}
-
-int	find_unq_jelly(t_data *map)
-{
-	int	y;
-	int	x;
-	int check;
-
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->map[y][x] == 'C')
-			{
-				check = check_if_exit(map, y, x);
-				return (check);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
 }

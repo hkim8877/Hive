@@ -5,27 +5,28 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR := srcs
 LIBFT_DIR = ./libft
-MLX_DIR = ./minilibx-linux
-MLX_BUILD_DIR = $(MLX_DIR)/build
+MLX_DIR = ./MLX42 
 
 LIBFT_A = $(LIBFT_DIR)/libft.a
-MLX_A = $(MLX_BUILD_DIR)/libmlx42.a
+MLX_LIB = $(MLX_BUILD_DIR)/libmlx42.a
 
 IFLAGS := -I ./include \
           -I $(LIBFT_DIR) \
-          -I $(MLX_DIR)
+          -I $(MLX_DIR)/include
 
 OS := $(shell uname)
 
 ifeq ($(OS), Darwin)
 	LFLAGS := -L $(LIBFT_DIR) -lft \
-	           -L $(MLX_DIR) -lmlx \
-	           -framework OpenGL -framework AppKit
+	          -L$(MLX_BUILD_DIR) -lmlx42 \
+	          -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo \
+              -ldl -lglfw -pthread -lm 
 
 else ifeq ($(OS), Linux)
+	
 	LFLAGS := -L $(LIBFT_DIR) -lft \
-	           -L $(MLX_DIR) -lmlx \
-	           -lXext -lX11 -lm -lz
+	          -L$(MLX_BUILD_DIR) -lmlx42 \
+	          -ldl -lglfw -pthread -lm -lXext -lX11
 endif
 
 SRCS := $(SRC_DIR)/main.c \
@@ -41,12 +42,10 @@ SRCS := $(SRC_DIR)/main.c \
 
 OBJS := $(SRCS:%.c=%.o)
 
-all: $(NAME)
+all: $(MLX_DIR) $(LIBFT_A) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_A) $(MLX_A)
+$(NAME): $(OBJS) $(MLFT_A) $(MLX_LIB)
 	$(CC) $(OBJS) $(LFLAGS) -o $(NAME)
-
-$(OBJS): $(MLX_A)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
@@ -54,9 +53,11 @@ $(OBJS): $(MLX_A)
 $(LIBFT_A):
 	@make -C $(LIBFT_DIR)
 
-$(MLX_A):
-	@git clone https://github.com/42paris/minilibx-linux.git $(MLX_DIR)
-	@make -C $(MLX_DIR)
+$(MLX_DIR):
+	@git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR) || echo "MLX42 directory already exists, skipping clone."
+	@cmake $(MLX_DIR) -B $(MLX_BUILD_DIR) # Use MLX_BUILD_DIR for cmake build
+	@make -C $(MLX_BUILD_DIR) -j4
+
 clean:
 	@make clean -C $(LIBFT_DIR)
 	@rm -f $(OBJS)

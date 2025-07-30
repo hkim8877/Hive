@@ -23,8 +23,7 @@ void	is_map_valid(t_data *map, char *file)
 	init_map(map, fd);
 	check_wall(map, fd);
 	check_path(map, fd);
-	if (find_unq_jelly(map))
-		check_path_edge(map, fd);
+	check_path_edge(map, fd);
 }
 
 void	check_chr(t_data *map)
