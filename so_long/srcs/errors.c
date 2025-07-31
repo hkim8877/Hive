@@ -24,7 +24,7 @@ void	map_error(int fd, int code, t_data *map)
 	if (code == 1)
 		ft_error("Error: map file is empty or cannot be read!\n");
 	if (code == 2)
-		ft_error("Error: map is not rectangular!\n");
+		ft_error("Error: map size error or has empty lines!\n");
 	if (code == 3)
 		ft_error("Error: memory allocation failed!\n");
 	if (code == 4)

@@ -29,8 +29,7 @@ SRCS := $(SRC_DIR)/so_long.c \
 	$(SRC_DIR)/init_data.c \
 	$(SRC_DIR)/keys_utils.c \
 	$(SRC_DIR)/path_utils.c \
-	$(SRC_DIR)/read_map.c \
-	$(SRC_DIR)/handle_edge.c
+	$(SRC_DIR)/read_map.c 
 
 OBJS := $(SRCS:%.c=%.o)
 

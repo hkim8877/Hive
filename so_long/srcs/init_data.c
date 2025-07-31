@@ -22,6 +22,7 @@ void	init_data(t_data *map)
 	map->collect_img = NULL;
 	map->back_img = NULL;
 	map->map = NULL;
+	map->under_player = '0';
 	map->width = 0;
 	map->height = 0;
 	map->x = 0;

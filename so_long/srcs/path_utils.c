@@ -14,6 +14,7 @@
 
 static void	flood_fill(char **tmp, t_data *map, int x, int y);
 static void	filling(char **tmp, t_data *map);
+static int	is_path_valid(char **tmp, t_data *map);
 
 void	check_path(t_data *map, int fd)
 {
@@ -28,11 +29,11 @@ void	check_path(t_data *map, int fd)
 	filling(tmp, map);
 	if (!is_path_valid(tmp, map))
 	{
-		free_map(map);
 		free_tmp(tmp, map->height);
+		free_map(map);
 		map_error(fd, 6, map);
 	}
-	free_tmp(tmp, map->height);
+		free_tmp(tmp, map->height);
 }
 
 char	**map_copy(t_data *map)
@@ -91,7 +92,7 @@ static void	filling(char **tmp, t_data *map)
 	}
 }
 
-int	is_path_valid(char **tmp, t_data *map)
+static int	is_path_valid(char **tmp, t_data *map)
 {
 	int	y;
 	int	x;
@@ -102,16 +103,8 @@ int	is_path_valid(char **tmp, t_data *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if (!find_unq_jelly(map))
-			{
-				if (tmp[y][x] == 'C' && tmp[y][x] == 'E')
+			if (tmp[y][x] == 'C' || tmp[y][x] == 'E')
 					return (0);
-			}
-			else
-			{
-				if (tmp[y][x] == 'P')
-					return (0);
-			}
 			x++;
 		}
 		y++;

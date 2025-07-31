@@ -40,6 +40,7 @@ typedef struct s_data
 	void	*collect_img;
 	void	*back_img;
 	char	**map;
+	char	under_player;
 	int		width;
 	int		height;
 	int		x;
@@ -58,10 +59,7 @@ void	init_map(t_data *map, int fd);
 void	check_chr(t_data *map);
 void	check_wall(t_data *map, int fd);
 void	check_path(t_data *map, int fd);
-void	check_path_edge(t_data *map, int fd);
 char	**map_copy(t_data *map);
-int		is_path_valid(char **tmp, t_data *map);
-int		find_unq_jelly(t_data *map);
 
 // init_data.c && errors.c
 void	init_data(t_data *map);

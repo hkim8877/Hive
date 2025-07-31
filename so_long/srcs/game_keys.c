@@ -35,15 +35,27 @@ int	key_hook(int keycode, t_data *map)
 	return (0);
 }
 
+
 void	move_up(t_data *map, int x, int y)
 {
 	int	i;
 	int	j;
-
+	
 	find_player(map);
 	i = map->x;
 	j = map->y;
-	if (map->map[j - 1][i] != '1' && map->map[j - 1][i] != 'E')
+	if (map->under_player == 'E')
+	{
+		if (map->map[j - 1][i] != '1')
+		{
+			map->map[y][x] = 'E';
+			map->map[j - 1][i] = 'P';
+			map->moves++;
+			ft_printf("Moves: %i\n", map->moves);
+		}
+		map->under_player = '0';
+	}
+	else if (map->map[j - 1][i] != '1' && map->map[j - 1][i] != 'E')
 	{
 		map->map[y][x] = '0';
 		map->map[j - 1][i] = 'P';
@@ -59,6 +71,11 @@ void	move_up(t_data *map, int x, int y)
 			ft_printf("Enjoy your jellys!\n");
 			end_game(map);
 		}
+		map->map[y][x] = '0';
+   		map->under_player = 'E';
+		map->map[j - 1][i] = 'P';
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
 	}
 }
 
@@ -70,7 +87,18 @@ void	move_down(t_data *map, int x, int y)
 	find_player(map);
 	i = map->x;
 	j = map->y;
-	if (map->map[j + 1][i] != '1' && map->map[j + 1][i] != 'E')
+	if (map->under_player == 'E')
+	{
+		if (map->map[j + 1][i] != '1')
+		{
+			map->map[y][x] = 'E';
+			map->map[j + 1][i] = 'P';
+			map->moves++;
+			ft_printf("Moves: %i\n", map->moves);
+		}
+		map->under_player = '0';
+	}
+	else if (map->map[j + 1][i] != '1' && map->map[j + 1][i] != 'E')
 	{
 		map->map[y][x] = '0';
 		map->map[j + 1][i] = 'P';
@@ -86,6 +114,11 @@ void	move_down(t_data *map, int x, int y)
 			ft_printf("Enjoy your jellys!\n");
 			end_game(map);
 		}
+		map->map[y][x] = '0';
+   		map->under_player = 'E';
+		map->map[j + 1][i] = 'P';
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
 	}
 }
 
@@ -97,7 +130,18 @@ void	move_left(t_data *map, int x, int y)
 	find_player(map);
 	i = map->x;
 	j = map->y;
-	if (map->map[j][i - 1] != '1' && map->map[j][i - 1] != 'E')
+	if (map->under_player == 'E')
+	{
+		if (map->map[j][i - 1] != '1')
+		{
+			map->map[y][x] = 'E';
+			map->map[j][i - 1] = 'P';
+			map->moves++;
+			ft_printf("Moves: %i\n", map->moves);
+		}
+		map->under_player = '0';
+	}
+	else if (map->map[j][i - 1] != '1' && map->map[j][i - 1] != 'E')
 	{
 		map->map[y][x] = '0';
 		map->map[j][i - 1] = 'P';
@@ -113,6 +157,11 @@ void	move_left(t_data *map, int x, int y)
 			ft_printf("Enjoy your jellys!\n");
 			end_game(map);
 		}
+		map->map[y][x] = '0';
+   		map->under_player = 'E';
+		map->map[j][i - 1] = 'P';
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
 	}
 }
 
@@ -124,7 +173,18 @@ void	move_right(t_data *map, int x, int y)
 	find_player(map);
 	i = map->x;
 	j = map->y;
-	if (map->map[j][i + 1] != '1' && map->map[j][i + 1] != 'E')
+	if (map->under_player == 'E')
+	{
+		if (map->map[j][i + 1] != '1')
+		{
+			map->map[y][x] = 'E';
+			map->map[j][i + 1] = 'P';
+			map->moves++;
+			ft_printf("Moves: %i\n", map->moves);
+		}
+		map->under_player = '0';
+	}
+	else if (map->map[j][i + 1] != '1' && map->map[j][i + 1] != 'E')
 	{
 		map->map[y][x] = '0';
 		map->map[j][i + 1] = 'P';
@@ -140,5 +200,10 @@ void	move_right(t_data *map, int x, int y)
 			ft_printf("Enjoy your jellys!\n");
 			end_game(map);
 		}
+		map->map[y][x] = '0';
+   		map->under_player = 'E';
+		map->map[j][i + 1] = 'P';
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
 	}
 }

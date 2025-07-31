@@ -20,11 +20,11 @@ void	is_map_valid(t_data *map, char *file)
 	if (fd == -1)
 		ft_error("Error: file open error!\n");
 	check_chr(map);
+	if (map->width > 100 || map->height > 100)
+		map_error(fd, 2, map);
 	init_map(map, fd);
 	check_wall(map, fd);
-	check_path(map, fd);
-	if (find_unq_jelly(map))
-		check_path_edge(map, fd);
+	check_path(map, fd);		
 }
 
 void	check_chr(t_data *map)
