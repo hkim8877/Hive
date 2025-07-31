@@ -6,47 +6,40 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_DIR := srcs
 LIBFT_DIR = ./libft
 MLX_DIR = ./minilibx-linux
-MLX_BUILD_DIR = $(MLX_DIR)/build
 
 LIBFT_A = $(LIBFT_DIR)/libft.a
-MLX_A = $(MLX_BUILD_DIR)/libmlx42.a
+MLX_A = $(MLX_DIR)/libmlx.a 
 
-IFLAGS := -I ./include \
-          -I $(LIBFT_DIR) \
-          -I $(MLX_DIR)
+IFLAGS := -I./include -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 OS := $(shell uname)
 
 ifeq ($(OS), Darwin)
-	LFLAGS := -L $(LIBFT_DIR) -lft \
-	           -L $(MLX_DIR) -lmlx \
-	           -framework OpenGL -framework AppKit
+	LFLAGS := -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 else ifeq ($(OS), Linux)
-	LFLAGS := -L $(LIBFT_DIR) -lft \
-	           -L $(MLX_DIR) -lmlx \
-	           -lXext -lX11 -lm -lz
+	LFLAGS := -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 endif
 
-SRCS := $(SRC_DIR)/main.c \
-		$(SRC_DIR)/check_map.c \
-		$(SRC_DIR)/errors.c \
-		$(SRC_DIR)/game_images.c \
-		$(SRC_DIR)/game_keys.c \
-		$(SRC_DIR)/init_data.c \
-		$(SRC_DIR)/keys_utils.c \
-		$(SRC_DIR)/path_utils.c \
-		$(SRC_DIR)/read_map.c \
-		$(SRC_DIR)/handle_edge.c
+SRCS := $(SRC_DIR)/so_long.c \
+	$(SRC_DIR)/check_map.c \
+	$(SRC_DIR)/errors.c \
+	$(SRC_DIR)/game_images.c \
+	$(SRC_DIR)/game_keys.c \
+	$(SRC_DIR)/init_data.c \
+	$(SRC_DIR)/keys_utils.c \
+	$(SRC_DIR)/path_utils.c \
+	$(SRC_DIR)/read_map.c \
+	$(SRC_DIR)/handle_edge.c
 
 OBJS := $(SRCS:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_A) $(MLX_A)
-	$(CC) $(OBJS) $(LFLAGS) -o $(NAME)
+$(OBJS): $(LIBFT_A) $(MLX_A)
 
-$(OBJS): $(MLX_A)
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(LFLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
@@ -55,8 +48,15 @@ $(LIBFT_A):
 	@make -C $(LIBFT_DIR)
 
 $(MLX_A):
-	@git clone https://github.com/42paris/minilibx-linux.git $(MLX_DIR)
+	@if [ ! -d $(MLX_DIR)/.git ]; then \
+		echo "Cloning minilibx-linux repository..."; \
+		git clone https://github.com/42paris/minilibx-linux.git $(MLX_DIR); \
+	fi
+	@echo "Running MiniLibX configure..."
+	@cd $(MLX_DIR) && ./configure 
+	@echo "Building MiniLibX..."
 	@make -C $(MLX_DIR)
+
 clean:
 	@make clean -C $(LIBFT_DIR)
 	@rm -f $(OBJS)

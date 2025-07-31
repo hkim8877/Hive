@@ -12,9 +12,9 @@
 
 #include "so_long.h"
 
-static void make_map(t_data *map, char *line, int fd, int first_line)
+static void	make_map(t_data *map, char *line, int fd, int first_line)
 {
-	int check_wid;
+	int	check_wid;
 
 	check_line(map, line);
 	check_wid = ft_strlen(line);
@@ -47,7 +47,7 @@ void	read_map(t_data *map, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		make_map(map, line, fd, 0);		
+		make_map(map, line, fd, 0);
 	}
 }
 

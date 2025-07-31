@@ -83,7 +83,7 @@ int	find_unq_jelly(t_data *map)
 {
 	int	y;
 	int	x;
-	int check;
+	int	check;
 
 	y = 0;
 	while (y < map->height)

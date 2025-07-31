@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -60,8 +60,8 @@ void	check_wall(t_data *map, int fd);
 void	check_path(t_data *map, int fd);
 void	check_path_edge(t_data *map, int fd);
 char	**map_copy(t_data *map);
-int	is_path_valid(char **tmp, t_data *map);
-int	find_unq_jelly(t_data *map);
+int		is_path_valid(char **tmp, t_data *map);
+int		find_unq_jelly(t_data *map);
 
 // init_data.c && errors.c
 void	init_data(t_data *map);
