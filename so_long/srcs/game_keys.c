@@ -35,175 +35,114 @@ int	key_hook(int keycode, t_data *map)
 	return (0);
 }
 
-
 void	move_up(t_data *map, int x, int y)
 {
-	int	i;
-	int	j;
-	
-	find_player(map);
-	i = map->x;
-	j = map->y;
+	char	dest;
+
+	dest = map->map[y - 1][x];
+	if (dest == '1')
+		return ;
+	if (dest == 'E' && !find_jelly(map))
+	{
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
+		ft_printf("Enjoy your jellys!\n");
+		end_game(map);
+		return ;
+	}
 	if (map->under_player == 'E')
-	{
-		if (map->map[j - 1][i] != '1')
-		{
-			map->map[y][x] = 'E';
-			map->map[j - 1][i] = 'P';
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-		}
+		map->map[y][x] = 'E';
+	else
+		map->map[y][x] = '0';
+	if (dest == 'E')
+		map->under_player = 'E';
+	else
 		map->under_player = '0';
-	}
-	else if (map->map[j - 1][i] != '1' && map->map[j - 1][i] != 'E')
-	{
-		map->map[y][x] = '0';
-		map->map[j - 1][i] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
-	else if (map->map[j - 1][i] == 'E')
-	{
-		if (!find_jelly(map))
-		{
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-			ft_printf("Enjoy your jellys!\n");
-			end_game(map);
-		}
-		map->map[y][x] = '0';
-   		map->under_player = 'E';
-		map->map[j - 1][i] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
+	map->map[y - 1][x] = 'P';
+	map->moves++;
+	ft_printf("Moves: %i\n", map->moves);
 }
 
 void	move_down(t_data *map, int x, int y)
 {
-	int	i;
-	int	j;
+	char	dest;
 
-	find_player(map);
-	i = map->x;
-	j = map->y;
+	dest = map->map[y + 1][x];
+	if (dest == '1')
+		return ;
+	if (dest == 'E' && !find_jelly(map))
+	{
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
+		ft_printf("Enjoy your jellys!\n");
+		end_game(map);
+		return ;
+	}
 	if (map->under_player == 'E')
-	{
-		if (map->map[j + 1][i] != '1')
-		{
-			map->map[y][x] = 'E';
-			map->map[j + 1][i] = 'P';
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-		}
+		map->map[y][x] = 'E';
+	else
+		map->map[y][x] = '0';
+	if (dest == 'E')
+		map->under_player = 'E';
+	else
 		map->under_player = '0';
-	}
-	else if (map->map[j + 1][i] != '1' && map->map[j + 1][i] != 'E')
-	{
-		map->map[y][x] = '0';
-		map->map[j + 1][i] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
-	else if (map->map[j + 1][i] == 'E')
-	{
-		if (!find_jelly(map))
-		{
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-			ft_printf("Enjoy your jellys!\n");
-			end_game(map);
-		}
-		map->map[y][x] = '0';
-   		map->under_player = 'E';
-		map->map[j + 1][i] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
+	map->map[y + 1][x] = 'P';
+	map->moves++;
+	ft_printf("Moves: %i\n", map->moves);
 }
 
 void	move_left(t_data *map, int x, int y)
 {
-	int	i;
-	int	j;
+	char	dest;
 
-	find_player(map);
-	i = map->x;
-	j = map->y;
+	dest = map->map[y][x - 1];
+	if (dest == '1')
+		return ;
+	if (dest == 'E' && !find_jelly(map))
+	{
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
+		ft_printf("Enjoy your jellys!\n");
+		end_game(map);
+		return ;
+	}
 	if (map->under_player == 'E')
-	{
-		if (map->map[j][i - 1] != '1')
-		{
-			map->map[y][x] = 'E';
-			map->map[j][i - 1] = 'P';
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-		}
+		map->map[y][x] = 'E';
+	else
+		map->map[y][x] = '0';
+	if (dest == 'E')
+		map->under_player = 'E';
+	else
 		map->under_player = '0';
-	}
-	else if (map->map[j][i - 1] != '1' && map->map[j][i - 1] != 'E')
-	{
-		map->map[y][x] = '0';
-		map->map[j][i - 1] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
-	else if (map->map[j][i - 1] == 'E')
-	{
-		if (!find_jelly(map))
-		{
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-			ft_printf("Enjoy your jellys!\n");
-			end_game(map);
-		}
-		map->map[y][x] = '0';
-   		map->under_player = 'E';
-		map->map[j][i - 1] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
+	map->map[y][x - 1] = 'P';
+	map->moves++;
+	ft_printf("Moves: %i\n", map->moves);
 }
 
 void	move_right(t_data *map, int x, int y)
 {
-	int	i;
-	int	j;
+	char	dest;
 
-	find_player(map);
-	i = map->x;
-	j = map->y;
+	dest = map->map[y][x + 1];
+	if (dest == '1')
+		return ;
+	if (dest == 'E' && !find_jelly(map))
+	{
+		map->moves++;
+		ft_printf("Moves: %i\n", map->moves);
+		ft_printf("Enjoy your jellys!\n");
+		end_game(map);
+		return ;
+	}
 	if (map->under_player == 'E')
-	{
-		if (map->map[j][i + 1] != '1')
-		{
-			map->map[y][x] = 'E';
-			map->map[j][i + 1] = 'P';
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-		}
+		map->map[y][x] = 'E';
+	else
+		map->map[y][x] = '0';
+	if (dest == 'E')
+		map->under_player = 'E';
+	else
 		map->under_player = '0';
-	}
-	else if (map->map[j][i + 1] != '1' && map->map[j][i + 1] != 'E')
-	{
-		map->map[y][x] = '0';
-		map->map[j][i + 1] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
-	else if (map->map[j][i + 1] == 'E')
-	{
-		if (!find_jelly(map))
-		{
-			map->moves++;
-			ft_printf("Moves: %i\n", map->moves);
-			ft_printf("Enjoy your jellys!\n");
-			end_game(map);
-		}
-		map->map[y][x] = '0';
-   		map->under_player = 'E';
-		map->map[j][i + 1] = 'P';
-		map->moves++;
-		ft_printf("Moves: %i\n", map->moves);
-	}
+	map->map[y][x + 1] = 'P';
+	map->moves++;
+	ft_printf("Moves: %i\n", map->moves);
 }

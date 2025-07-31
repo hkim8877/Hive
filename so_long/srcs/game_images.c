@@ -52,8 +52,8 @@ void	get_images(t_data *map)
 	if (!map->player_img || !map->wall_img || !map->exit_img
 		|| !map->collect_img || !map->back_img)
 	{
-		free_all(map->win);
 		ft_error("Error: image file error!\n");
+		free_all(map->win);
 	}
 	render_map(map);
 }
