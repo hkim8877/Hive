@@ -24,7 +24,7 @@ void	is_map_valid(t_data *map, char *file)
 		map_error(fd, 2, map);
 	init_map(map, fd);
 	check_wall(map, fd);
-	check_path(map, fd);		
+	check_path(map, fd);
 }
 
 void	check_chr(t_data *map)

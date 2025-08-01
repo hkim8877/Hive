@@ -33,7 +33,7 @@ void	check_path(t_data *map, int fd)
 		free_map(map);
 		map_error(fd, 6, map);
 	}
-		free_tmp(tmp, map->height);
+	free_tmp(tmp, map->height);
 }
 
 char	**map_copy(t_data *map)
@@ -104,7 +104,7 @@ static int	is_path_valid(char **tmp, t_data *map)
 		while (x < map->width)
 		{
 			if (tmp[y][x] == 'C' || tmp[y][x] == 'E')
-					return (0);
+				return (0);
 			x++;
 		}
 		y++;
