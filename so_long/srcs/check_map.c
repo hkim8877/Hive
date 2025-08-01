@@ -20,7 +20,7 @@ void	is_map_valid(t_data *map, char *file)
 	if (fd == -1)
 		ft_error("Error: file open error!\n");
 	check_chr(map);
-	if (map->width > 100 || map->height > 100)
+	if (map->width > 60 || map->height > 34)
 		map_error(fd, 2, map);
 	init_map(map, fd);
 	check_wall(map, fd);
