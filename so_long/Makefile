@@ -48,12 +48,9 @@ $(LIBFT_A):
 
 $(MLX_A):
 	@if [ ! -d $(MLX_DIR)/.git ]; then \
-		echo "Cloning minilibx-linux repository..."; \
 		git clone https://github.com/42paris/minilibx-linux.git $(MLX_DIR); \
 	fi
-	@echo "Running MiniLibX configure..."
 	@cd $(MLX_DIR) && ./configure 
-	@echo "Building MiniLibX..."
 	@make -C $(MLX_DIR)
 
 clean:
