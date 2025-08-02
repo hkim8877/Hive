@@ -40,15 +40,15 @@ void	get_images(t_data *map)
 	int	hei;
 
 	map->player_img = mlx_xpm_file_to_image(map->mlx,
-			"assets/player.xpm", &wid, &hei);
+			"textures/player.xpm", &wid, &hei);
 	map->wall_img = mlx_xpm_file_to_image(map->mlx,
-			"assets/wall.xpm", &wid, &hei);
+			"textures/wall.xpm", &wid, &hei);
 	map->exit_img = mlx_xpm_file_to_image(map->mlx,
-			"assets/exit.xpm", &wid, &hei);
+			"textures/exit.xpm", &wid, &hei);
 	map->collect_img = mlx_xpm_file_to_image(map->mlx,
-			"assets/jelly.xpm", &wid, &hei);
+			"textures/jelly.xpm", &wid, &hei);
 	map->back_img = mlx_xpm_file_to_image(map->mlx,
-			"assets/background.xpm", &wid, &hei);
+			"textures/background.xpm", &wid, &hei);
 	if (!map->player_img || !map->wall_img || !map->exit_img
 		|| !map->collect_img || !map->back_img)
 	{
