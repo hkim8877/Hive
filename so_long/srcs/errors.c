@@ -68,13 +68,20 @@ void	free_tmp(char **tmp, int height)
 
 void	free_all(t_data *map)
 {
-	mlx_destroy_image(map->mlx, map->player_img);
-	mlx_destroy_image(map->mlx, map->wall_img);
-	mlx_destroy_image(map->mlx, map->exit_img);
-	mlx_destroy_image(map->mlx, map->collect_img);
-	mlx_destroy_image(map->mlx, map->back_img);
-	mlx_destroy_window(map->mlx, map->win);
-	mlx_destroy_display(map->mlx);
+	if (map->player_img)
+		mlx_destroy_image(map->mlx, map->player_img);
+	if (map->wall_img)
+		mlx_destroy_image(map->mlx, map->wall_img);
+	if (map->exit_img)
+		mlx_destroy_image(map->mlx, map->exit_img);
+	if (map->collect_img)
+		mlx_destroy_image(map->mlx, map->collect_img);
+	if (map->back_img)
+		mlx_destroy_image(map->mlx, map->back_img);
+	if (map->mlx && map->win)
+		mlx_destroy_window(map->mlx, map->win);
+	if (map->mlx)
+		mlx_destroy_display(map->mlx);
 	free_map(map);
 	free(map->mlx);
 }
