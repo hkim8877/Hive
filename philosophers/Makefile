@@ -1,12 +1,19 @@
 NAME := philo
 
-SRCS := main.c
+SRCS := check_args.c \
+		init.c \
+		print.c \
+		routine.c \
+		monitoring.c \
+		utils.c \
+		single_philo.c \
+		main.c
 
 OBJS := $(SRCS:%.c=%.o)
 
 HEADERS := philosophers.h
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 $(NAME) : $(OBJS)
 	cc $(CFLAGS) -o $@ $^
