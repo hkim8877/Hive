@@ -52,14 +52,6 @@ void	*monitoring(void *arg)
         }
         pthread_mutex_unlock(&data->mtx);
         usleep(500);
-        // if (data->must_eat != -1 && finished_eating == data->num_philos)
-        // {
-        //     pthread_mutex_lock(&data->mtx);
-        //     data->end_flag = true;
-        //     pthread_mutex_unlock(&data->mtx);
-        //     break ;
-        // }
-        // usleep(500);
     }
     return (NULL);
 }
